@@ -10,11 +10,12 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
   def protobufProduct[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
+    val to = mkHListValue(fieldsOf(tpe))
     val clsName = TypeName(c.freshName("anon$"))
     q"""
       final class $clsName extends _root_.shapeless.Generic[$tpe] {
         type Repr = $repr
-        def to(p: $tpe): Repr = _root_.shapeless.::(p.getMyString, _root_.shapeless.::(p.getMyInt, _root_.shapeless.::(p.getMyBool, _root_.shapeless.HNil)))
+        def to(p: $tpe): Repr = $to
         def from(p: Repr): $tpe = p match { case _root_.shapeless.::(s, _root_.shapeless.::(i, _root_.shapeless.::(b, _root_.shapeless.HNil))) => _root_.proto.test.LittleFile.MyMessage.newBuilder().setMyString(s).setMyInt(i).setMyBool(b).build() }
       }
       new $clsName(): _root_.shapeless.Generic.Aux[$tpe, $repr]
@@ -27,6 +28,14 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
   def reprTypTree(tpe: Type): Tree = {
     val fields = fieldsOf(tpe)
     mkCompoundTypTree(hnilTpe, hconsTpe, fields)
+  }
+
+  def mkHListValue(elems: List[Type]): Tree = {
+    elems match {
+      case Nil => q"_root_.shapeless.HNil"
+      case scala.collection.immutable.::(x, xs) =>
+        q"_root_.shapeless.::(p.${x.termSymbol}, ${mkHListValue(xs)})"
+    }
   }
 
   def fieldsOf(tpe: Type): List[Type] = {
