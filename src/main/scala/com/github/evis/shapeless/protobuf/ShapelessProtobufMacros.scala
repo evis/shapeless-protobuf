@@ -38,12 +38,7 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
     }.get.asType.toType.decls.sorted.collect { // TODO get may throw exception
       case sym: TermSymbol =>
         sym.typeSignatureIn(tpe).finalResultType
-    }.filter {
-      _.typeSymbol.fullName match {
-        case "com.google.protobuf.ByteString" => false
-        case _ => true
-      }
-    }
+    }.filter(_.typeSymbol.fullName != "com.google.protobuf.ByteString")
   }
 
   def mkAttributedRef(tpe: Type): Tree = {
