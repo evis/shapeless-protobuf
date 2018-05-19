@@ -30,11 +30,9 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
     mkCompoundTypTree(hnilTpe, hconsTpe, fields)
   }
 
-  def mkHListValue(elems: List[TermSymbol]): Tree = {
-    elems match {
-      case Nil => q"_root_.shapeless.HNil"
-      case scala.collection.immutable.::(x, xs) =>
-        q"_root_.shapeless.::(p.$x, ${mkHListValue(xs)})"
+  def mkHListValue(fields: List[TermSymbol]): Tree = {
+    fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
+      q"_root_.shapeless.::(p.$field, $acc)"
     }
   }
 
