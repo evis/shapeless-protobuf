@@ -12,5 +12,9 @@ object Main extends App {
     implicitly[Generic.Aux[MyMessage, String :: Int :: Boolean :: HNil]].from("hello" :: 1234 :: true :: HNil)
   }
 
+  println {
+    implicitly[Generic.Aux[MyMessage, String :: Int :: Boolean :: HNil]].to(MyMessage.newBuilder().setMyString("hello").setMyInt(1234).setMyBool(true).build())
+  }
+
   println(implicitly[Arbitrary[MyMessage]].arbitrary.sample.get)
 }
