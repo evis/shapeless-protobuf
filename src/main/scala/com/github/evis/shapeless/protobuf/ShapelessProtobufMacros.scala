@@ -1,6 +1,5 @@
 package com.github.evis.shapeless.protobuf
 
-import proto.test.LittleFile.MyMessage
 import shapeless.{::, HNil}
 
 import scala.reflect.macros.whitebox
@@ -10,9 +9,6 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
 
   def protobufProduct[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
-    if (!(tpe <:< typeOf[MyMessage])) {
-      sys.error("not MyMessage")
-    }
     val clsName = TypeName(c.freshName("anon$"))
     q"""
       final class $clsName extends _root_.shapeless.Generic[$tpe] {
