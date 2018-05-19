@@ -30,13 +30,12 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
   }
 
   def fieldsOf(tpe: Type): List[Type] = {
-    val tpeInterface = tpe.baseClasses.filter {
+    tpe.baseClasses.filter {
       _.fullName match {
         case "com.google.protobuf.MessageOrBuilder" => false
         case name => name.endsWith("OrBuilder")
       }
-    }.head.asType.toType // TODO head may throw exception
-    tpeInterface.decls.sorted.collect {
+    }.head.asType.toType.decls.sorted.collect { // TODO head may throw exception
       case sym: TermSymbol =>
         sym.typeSignatureIn(tpe).finalResultType
     }.filter {
