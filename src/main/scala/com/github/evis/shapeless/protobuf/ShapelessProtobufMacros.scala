@@ -20,8 +20,8 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
     """
   }
 
-  def hnilTpe = typeOf[HNil]
-  def hconsTpe = typeOf[::[_, _]].typeConstructor
+  def hnilTpe: Type = typeOf[HNil]
+  def hconsTpe: Type = typeOf[::[_, _]].typeConstructor
 
   def reprTypTree(tpe: Type): Tree = {
     val fields = fieldsOf(tpe)
