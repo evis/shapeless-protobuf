@@ -26,29 +26,33 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
   def hconsTpe: Type = typeOf[::[_, _]].typeConstructor
 
   def reprTypTree(tpe: Type): Tree = {
-    val fields = fieldsOf(tpe)
+    val fields = fieldsResultTypesOf(tpe)
     mkCompoundTypTree(hnilTpe, hconsTpe, fields)
   }
 
-  def mkHListValue(elems: List[Type]): Tree = {
+  def mkHListValue(elems: List[TermSymbol]): Tree = {
     elems match {
       case Nil => q"_root_.shapeless.HNil"
       case scala.collection.immutable.::(x, xs) =>
-        q"_root_.shapeless.::(p.${x.termSymbol}, ${mkHListValue(xs)})"
+        q"_root_.shapeless.::(p.$x, ${mkHListValue(xs)})"
     }
   }
 
-  def fieldsOf(tpe: Type): List[Type] = {
+  def fieldsOf(tpe: Type): List[TermSymbol] = {
     tpe.baseClasses.find {
       _.fullName match {
         case "com.google.protobuf.MessageOrBuilder" => false
         case name => name.endsWith("OrBuilder")
       }
     }.get.asType.toType.decls.sorted.collect { // TODO get may throw exception
-      case sym: TermSymbol =>
-        sym.typeSignatureIn(tpe).finalResultType
-    }.filter(_.typeSymbol.fullName != "com.google.protobuf.ByteString")
+      case sym: TermSymbol
+        if sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName != "com.google.protobuf.ByteString" =>
+        sym
+    }
   }
+
+  def fieldsResultTypesOf(tpe: Type): List[Type] =
+    fieldsOf(tpe).map(_.typeSignatureIn(tpe).finalResultType)
 
   def mkAttributedRef(tpe: Type): Tree = {
     // TODO review this! just copy-pasted from shapeless
