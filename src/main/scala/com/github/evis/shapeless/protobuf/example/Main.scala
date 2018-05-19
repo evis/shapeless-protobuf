@@ -6,5 +6,7 @@ import com.github.evis.shapeless.protobuf._
 
 object Main extends App {
 
-  implicitly[Generic[MyMessage]].from("1234" :: 1234 :: HNil)
+  println {
+    implicitly[Generic.Aux[MyMessage, String :: Int :: Boolean :: HNil]].from("hello" :: 1234 :: true :: HNil)
+  }
 }
