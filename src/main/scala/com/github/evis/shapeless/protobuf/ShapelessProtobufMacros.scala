@@ -9,14 +9,15 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
 
   def protobufProduct[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
+    val repr = reprTypTree(tpe)
     val clsName = TypeName(c.freshName("anon$"))
     q"""
       final class $clsName extends _root_.shapeless.Generic[$tpe] {
-        type Repr = ${reprTypTree(tpe)}
+        type Repr = $repr
         def to(p: $tpe): Repr = _root_.shapeless.::(p.getMyString, _root_.shapeless.::(p.getMyInt, _root_.shapeless.::(p.getMyBool, _root_.shapeless.HNil)))
         def from(p: Repr): $tpe = p match { case _root_.shapeless.::(s, _root_.shapeless.::(i, _root_.shapeless.::(b, _root_.shapeless.HNil))) => _root_.proto.test.LittleFile.MyMessage.newBuilder().setMyString(s).setMyInt(i).setMyBool(b).build() }
       }
-      new $clsName(): _root_.shapeless.Generic.Aux[$tpe, ${reprTypTree(tpe)}]
+      new $clsName(): _root_.shapeless.Generic.Aux[$tpe, $repr]
     """
   }
 
