@@ -61,6 +61,19 @@ public final class LittleFile {
      * <code>bytes my_int_bytes = 7;</code>
      */
     com.google.protobuf.ByteString getMyIntBytes();
+
+    /**
+     * <code>.vertis.MyMessage.Inner inner = 8;</code>
+     */
+    boolean hasInner();
+    /**
+     * <code>.vertis.MyMessage.Inner inner = 8;</code>
+     */
+    proto.test.LittleFile.MyMessage.Inner getInner();
+    /**
+     * <code>.vertis.MyMessage.Inner inner = 8;</code>
+     */
+    proto.test.LittleFile.MyMessage.InnerOrBuilder getInnerOrBuilder();
   }
   /**
    * Protobuf type {@code vertis.MyMessage}
@@ -150,6 +163,19 @@ public final class LittleFile {
             case 58: {
 
               myIntBytes_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              proto.test.LittleFile.MyMessage.Inner.Builder subBuilder = null;
+              if (inner_ != null) {
+                subBuilder = inner_.toBuilder();
+              }
+              inner_ = input.readMessage(proto.test.LittleFile.MyMessage.Inner.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(inner_);
+                inner_ = subBuilder.buildPartial();
+              }
+
               break;
             }
           }
@@ -292,6 +318,595 @@ public final class LittleFile {
       // @@protoc_insertion_point(enum_scope:vertis.MyMessage.MyEnum)
     }
 
+    public interface InnerOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:vertis.MyMessage.Inner)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>int64 long_value = 1;</code>
+       */
+      long getLongValue();
+
+      /**
+       * <code>string key_value = 2;</code>
+       */
+      java.lang.String getKeyValue();
+      /**
+       * <code>string key_value = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getKeyValueBytes();
+    }
+    /**
+     * Protobuf type {@code vertis.MyMessage.Inner}
+     */
+    public  static final class Inner extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:vertis.MyMessage.Inner)
+        InnerOrBuilder {
+    private static final long serialVersionUID = 0L;
+      // Use Inner.newBuilder() to construct.
+      private Inner(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private Inner() {
+        longValue_ = 0L;
+        keyValue_ = "";
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
+      }
+      private Inner(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 8: {
+
+                longValue_ = input.readInt64();
+                break;
+              }
+              case 18: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                keyValue_ = s;
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.test.LittleFile.internal_static_vertis_MyMessage_Inner_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.test.LittleFile.internal_static_vertis_MyMessage_Inner_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.test.LittleFile.MyMessage.Inner.class, proto.test.LittleFile.MyMessage.Inner.Builder.class);
+      }
+
+      public static final int LONG_VALUE_FIELD_NUMBER = 1;
+      private long longValue_;
+      /**
+       * <code>int64 long_value = 1;</code>
+       */
+      public long getLongValue() {
+        return longValue_;
+      }
+
+      public static final int KEY_VALUE_FIELD_NUMBER = 2;
+      private volatile java.lang.Object keyValue_;
+      /**
+       * <code>string key_value = 2;</code>
+       */
+      public java.lang.String getKeyValue() {
+        java.lang.Object ref = keyValue_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          keyValue_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>string key_value = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeyValueBytes() {
+        java.lang.Object ref = keyValue_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          keyValue_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (longValue_ != 0L) {
+          output.writeInt64(1, longValue_);
+        }
+        if (!getKeyValueBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keyValue_);
+        }
+        unknownFields.writeTo(output);
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (longValue_ != 0L) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(1, longValue_);
+        }
+        if (!getKeyValueBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, keyValue_);
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof proto.test.LittleFile.MyMessage.Inner)) {
+          return super.equals(obj);
+        }
+        proto.test.LittleFile.MyMessage.Inner other = (proto.test.LittleFile.MyMessage.Inner) obj;
+
+        boolean result = true;
+        result = result && (getLongValue()
+            == other.getLongValue());
+        result = result && getKeyValue()
+            .equals(other.getKeyValue());
+        result = result && unknownFields.equals(other.unknownFields);
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        hash = (37 * hash) + LONG_VALUE_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getLongValue());
+        hash = (37 * hash) + KEY_VALUE_FIELD_NUMBER;
+        hash = (53 * hash) + getKeyValue().hashCode();
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static proto.test.LittleFile.MyMessage.Inner parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(proto.test.LittleFile.MyMessage.Inner prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code vertis.MyMessage.Inner}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:vertis.MyMessage.Inner)
+          proto.test.LittleFile.MyMessage.InnerOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return proto.test.LittleFile.internal_static_vertis_MyMessage_Inner_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return proto.test.LittleFile.internal_static_vertis_MyMessage_Inner_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  proto.test.LittleFile.MyMessage.Inner.class, proto.test.LittleFile.MyMessage.Inner.Builder.class);
+        }
+
+        // Construct using proto.test.LittleFile.MyMessage.Inner.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          longValue_ = 0L;
+
+          keyValue_ = "";
+
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return proto.test.LittleFile.internal_static_vertis_MyMessage_Inner_descriptor;
+        }
+
+        public proto.test.LittleFile.MyMessage.Inner getDefaultInstanceForType() {
+          return proto.test.LittleFile.MyMessage.Inner.getDefaultInstance();
+        }
+
+        public proto.test.LittleFile.MyMessage.Inner build() {
+          proto.test.LittleFile.MyMessage.Inner result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public proto.test.LittleFile.MyMessage.Inner buildPartial() {
+          proto.test.LittleFile.MyMessage.Inner result = new proto.test.LittleFile.MyMessage.Inner(this);
+          result.longValue_ = longValue_;
+          result.keyValue_ = keyValue_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, java.lang.Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof proto.test.LittleFile.MyMessage.Inner) {
+            return mergeFrom((proto.test.LittleFile.MyMessage.Inner)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(proto.test.LittleFile.MyMessage.Inner other) {
+          if (other == proto.test.LittleFile.MyMessage.Inner.getDefaultInstance()) return this;
+          if (other.getLongValue() != 0L) {
+            setLongValue(other.getLongValue());
+          }
+          if (!other.getKeyValue().isEmpty()) {
+            keyValue_ = other.keyValue_;
+            onChanged();
+          }
+          this.mergeUnknownFields(other.unknownFields);
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          proto.test.LittleFile.MyMessage.Inner parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (proto.test.LittleFile.MyMessage.Inner) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+
+        private long longValue_ ;
+        /**
+         * <code>int64 long_value = 1;</code>
+         */
+        public long getLongValue() {
+          return longValue_;
+        }
+        /**
+         * <code>int64 long_value = 1;</code>
+         */
+        public Builder setLongValue(long value) {
+          
+          longValue_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>int64 long_value = 1;</code>
+         */
+        public Builder clearLongValue() {
+          
+          longValue_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object keyValue_ = "";
+        /**
+         * <code>string key_value = 2;</code>
+         */
+        public java.lang.String getKeyValue() {
+          java.lang.Object ref = keyValue_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            keyValue_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>string key_value = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getKeyValueBytes() {
+          java.lang.Object ref = keyValue_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            keyValue_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>string key_value = 2;</code>
+         */
+        public Builder setKeyValue(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          keyValue_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string key_value = 2;</code>
+         */
+        public Builder clearKeyValue() {
+          
+          keyValue_ = getDefaultInstance().getKeyValue();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string key_value = 2;</code>
+         */
+        public Builder setKeyValueBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          keyValue_ = value;
+          onChanged();
+          return this;
+        }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.setUnknownFieldsProto3(unknownFields);
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:vertis.MyMessage.Inner)
+      }
+
+      // @@protoc_insertion_point(class_scope:vertis.MyMessage.Inner)
+      private static final proto.test.LittleFile.MyMessage.Inner DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new proto.test.LittleFile.MyMessage.Inner();
+      }
+
+      public static proto.test.LittleFile.MyMessage.Inner getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<Inner>
+          PARSER = new com.google.protobuf.AbstractParser<Inner>() {
+        public Inner parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Inner(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<Inner> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Inner> getParserForType() {
+        return PARSER;
+      }
+
+      public proto.test.LittleFile.MyMessage.Inner getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
     public static final int MY_STRING_FIELD_NUMBER = 1;
     private volatile java.lang.Object myString_;
     /**
@@ -387,6 +1002,27 @@ public final class LittleFile {
       return myIntBytes_;
     }
 
+    public static final int INNER_FIELD_NUMBER = 8;
+    private proto.test.LittleFile.MyMessage.Inner inner_;
+    /**
+     * <code>.vertis.MyMessage.Inner inner = 8;</code>
+     */
+    public boolean hasInner() {
+      return inner_ != null;
+    }
+    /**
+     * <code>.vertis.MyMessage.Inner inner = 8;</code>
+     */
+    public proto.test.LittleFile.MyMessage.Inner getInner() {
+      return inner_ == null ? proto.test.LittleFile.MyMessage.Inner.getDefaultInstance() : inner_;
+    }
+    /**
+     * <code>.vertis.MyMessage.Inner inner = 8;</code>
+     */
+    public proto.test.LittleFile.MyMessage.InnerOrBuilder getInnerOrBuilder() {
+      return getInner();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -419,6 +1055,9 @@ public final class LittleFile {
       }
       if (!myIntBytes_.isEmpty()) {
         output.writeBytes(7, myIntBytes_);
+      }
+      if (inner_ != null) {
+        output.writeMessage(8, getInner());
       }
       unknownFields.writeTo(output);
     }
@@ -455,6 +1094,10 @@ public final class LittleFile {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, myIntBytes_);
       }
+      if (inner_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getInner());
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -484,6 +1127,11 @@ public final class LittleFile {
           == other.getMyValue());
       result = result && getMyIntBytes()
           .equals(other.getMyIntBytes());
+      result = result && (hasInner() == other.hasInner());
+      if (hasInner()) {
+        result = result && getInner()
+            .equals(other.getInner());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -510,6 +1158,10 @@ public final class LittleFile {
       hash = (53 * hash) + getMyValue();
       hash = (37 * hash) + MY_INT_BYTES_FIELD_NUMBER;
       hash = (53 * hash) + getMyIntBytes().hashCode();
+      if (hasInner()) {
+        hash = (37 * hash) + INNER_FIELD_NUMBER;
+        hash = (53 * hash) + getInner().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -653,6 +1305,12 @@ public final class LittleFile {
 
         myIntBytes_ = com.google.protobuf.ByteString.EMPTY;
 
+        if (innerBuilder_ == null) {
+          inner_ = null;
+        } else {
+          inner_ = null;
+          innerBuilder_ = null;
+        }
         return this;
       }
 
@@ -682,6 +1340,11 @@ public final class LittleFile {
         result.myBytes_ = myBytes_;
         result.myValue_ = myValue_;
         result.myIntBytes_ = myIntBytes_;
+        if (innerBuilder_ == null) {
+          result.inner_ = inner_;
+        } else {
+          result.inner_ = innerBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -744,6 +1407,9 @@ public final class LittleFile {
         }
         if (other.getMyIntBytes() != com.google.protobuf.ByteString.EMPTY) {
           setMyIntBytes(other.getMyIntBytes());
+        }
+        if (other.hasInner()) {
+          mergeInner(other.getInner());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1020,6 +1686,123 @@ public final class LittleFile {
         onChanged();
         return this;
       }
+
+      private proto.test.LittleFile.MyMessage.Inner inner_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          proto.test.LittleFile.MyMessage.Inner, proto.test.LittleFile.MyMessage.Inner.Builder, proto.test.LittleFile.MyMessage.InnerOrBuilder> innerBuilder_;
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      public boolean hasInner() {
+        return innerBuilder_ != null || inner_ != null;
+      }
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      public proto.test.LittleFile.MyMessage.Inner getInner() {
+        if (innerBuilder_ == null) {
+          return inner_ == null ? proto.test.LittleFile.MyMessage.Inner.getDefaultInstance() : inner_;
+        } else {
+          return innerBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      public Builder setInner(proto.test.LittleFile.MyMessage.Inner value) {
+        if (innerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          inner_ = value;
+          onChanged();
+        } else {
+          innerBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      public Builder setInner(
+          proto.test.LittleFile.MyMessage.Inner.Builder builderForValue) {
+        if (innerBuilder_ == null) {
+          inner_ = builderForValue.build();
+          onChanged();
+        } else {
+          innerBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      public Builder mergeInner(proto.test.LittleFile.MyMessage.Inner value) {
+        if (innerBuilder_ == null) {
+          if (inner_ != null) {
+            inner_ =
+              proto.test.LittleFile.MyMessage.Inner.newBuilder(inner_).mergeFrom(value).buildPartial();
+          } else {
+            inner_ = value;
+          }
+          onChanged();
+        } else {
+          innerBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      public Builder clearInner() {
+        if (innerBuilder_ == null) {
+          inner_ = null;
+          onChanged();
+        } else {
+          inner_ = null;
+          innerBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      public proto.test.LittleFile.MyMessage.Inner.Builder getInnerBuilder() {
+        
+        onChanged();
+        return getInnerFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      public proto.test.LittleFile.MyMessage.InnerOrBuilder getInnerOrBuilder() {
+        if (innerBuilder_ != null) {
+          return innerBuilder_.getMessageOrBuilder();
+        } else {
+          return inner_ == null ?
+              proto.test.LittleFile.MyMessage.Inner.getDefaultInstance() : inner_;
+        }
+      }
+      /**
+       * <code>.vertis.MyMessage.Inner inner = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          proto.test.LittleFile.MyMessage.Inner, proto.test.LittleFile.MyMessage.Inner.Builder, proto.test.LittleFile.MyMessage.InnerOrBuilder> 
+          getInnerFieldBuilder() {
+        if (innerBuilder_ == null) {
+          innerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              proto.test.LittleFile.MyMessage.Inner, proto.test.LittleFile.MyMessage.Inner.Builder, proto.test.LittleFile.MyMessage.InnerOrBuilder>(
+                  getInner(),
+                  getParentForChildren(),
+                  isClean());
+          inner_ = null;
+        }
+        return innerBuilder_;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -1074,6 +1857,11 @@ public final class LittleFile {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_vertis_MyMessage_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_vertis_MyMessage_Inner_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_vertis_MyMessage_Inner_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1083,14 +1871,16 @@ public final class LittleFile {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\030vertis/little_file.proto\022\006vertis\"\347\001\n\tM" +
+      "\n\030vertis/little_file.proto\022\006vertis\"\277\002\n\tM" +
       "yMessage\022\021\n\tmy_string\030\001 \001(\t\022\016\n\006my_int\030\002 " +
       "\001(\005\022\017\n\007my_bool\030\003 \001(\010\022)\n\007my_enum\030\004 \001(\0162\030." +
       "vertis.MyMessage.MyEnum\022\020\n\010my_bytes\030\005 \001(" +
       "\014\022\020\n\010my_value\030\006 \001(\005\022\024\n\014my_int_bytes\030\007 \001(" +
-      "\014\"A\n\006MyEnum\022\013\n\007DEFAULT\020\000\022\014\n\010MY_VALUE\020\001\022\r" +
-      "\n\tHIS_VALUE\020\002\022\r\n\tHER_VALUE\020\003B\014\n\nproto.te" +
-      "stb\006proto3"
+      "\014\022&\n\005inner\030\010 \001(\0132\027.vertis.MyMessage.Inne" +
+      "r\032.\n\005Inner\022\022\n\nlong_value\030\001 \001(\003\022\021\n\tkey_va" +
+      "lue\030\002 \001(\t\"A\n\006MyEnum\022\013\n\007DEFAULT\020\000\022\014\n\010MY_V" +
+      "ALUE\020\001\022\r\n\tHIS_VALUE\020\002\022\r\n\tHER_VALUE\020\003B\014\n\n" +
+      "proto.testb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1109,7 +1899,13 @@ public final class LittleFile {
     internal_static_vertis_MyMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vertis_MyMessage_descriptor,
-        new java.lang.String[] { "MyString", "MyInt", "MyBool", "MyEnum", "MyBytes", "MyValue", "MyIntBytes", });
+        new java.lang.String[] { "MyString", "MyInt", "MyBool", "MyEnum", "MyBytes", "MyValue", "MyIntBytes", "Inner", });
+    internal_static_vertis_MyMessage_Inner_descriptor =
+      internal_static_vertis_MyMessage_descriptor.getNestedTypes().get(0);
+    internal_static_vertis_MyMessage_Inner_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_vertis_MyMessage_Inner_descriptor,
+        new java.lang.String[] { "LongValue", "KeyValue", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
