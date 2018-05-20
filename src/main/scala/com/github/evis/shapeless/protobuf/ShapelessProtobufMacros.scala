@@ -10,8 +10,9 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def protobufProduct[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
-    val to = mkHListValue(fieldsOf(tpe))
-    val from = mkFrom(tpe, fieldsOf(tpe))
+    val to = mkHListValue(tpe, fieldsOf(tpe), q"p")
+    val (pattern, builder) = mkFrom(tpe)
+    val from = cq" $pattern => $builder.build()"
     val clsName = TypeName(c.freshName("anon$"))
     q"""
       final class $clsName extends _root_.shapeless.Generic[$tpe] {
@@ -31,24 +32,41 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     mkCompoundTypTree(hnilTpe, hconsTpe, fields)
   }
 
-  def mkHListValue(fields: List[TermSymbol]): Tree = {
+  def mkHListValue(tpe: Type, fields: List[TermSymbol], prefix: Tree): Tree = {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
-      q"_root_.shapeless.::(p.$field, $acc)"
+      val fieldType = field.typeSignatureIn(tpe).finalResultType
+      val isMsg = fieldType.baseClasses.exists {
+        _.fullName.toString == "com.google.protobuf.Message"
+      }
+      if (isMsg) {
+        q"_root_.shapeless.::(${mkHListValue(fieldType, fieldsOf(fieldType), q"$prefix.$field")}, $acc)"
+      } else {
+        q"_root_.shapeless.::($prefix.$field, $acc)"
+      }
     }
   }
 
-  def mkFrom(tpe: Type, fields: List[TermSymbol]): Tree = {
-    val bindings = fields.map { _ => TermName(c.freshName("pat")) }
-    val pattern = bindings.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
-      pq"_root_.shapeless.::($field, $acc)"
-    }
-    val builder = fields.zip(bindings).foldLeft(q"${tpe.companion}.newBuilder()": Tree) {
-      case (acc, (field, binding)) =>
+  def mkFrom(tpe: Type): (Tree, Tree) = {
+    fieldsOf(tpe).foldRight((q"_root_.shapeless.HNil": Tree, q"${tpe.companion}.newBuilder()": Tree)) {
+      case (field, (patternAcc, builderAcc)) =>
         val setterName = field.name.toString.replaceFirst("get", "set")
         val setter = TermName(setterName)
-        q"$acc.$setter($binding)"
+        val fieldType = field.typeSignatureIn(tpe).resultType
+        val isMsg = fieldType.baseClasses.exists {
+          _.fullName.toString == "com.google.protobuf.Message"
+        }
+        if (isMsg) {
+          val (msgPattern, msgBuilder) = mkFrom(fieldType)
+          val pattern = pq"_root_.shapeless.::(($msgPattern), $patternAcc)"
+          val builder = q"$builderAcc.$setter($msgBuilder)"
+          (pattern, builder)
+        } else {
+          val patName = TermName(c.freshName("pat"))
+          val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+          val builder = q"$builderAcc.$setter($patName)"
+          (pattern, builder)
+        }
     }
-    cq" $pattern => $builder.build()"
   }
 
   def fieldsOf(tpe: Type): List[TermSymbol] = {
@@ -124,6 +142,8 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     tpe match {
       case SingleType(pre @ SingleType(_, _), sym) =>
         SingletonTypeTree(mkAttributedRef(pre, sym))
+      case t if t.baseClasses.exists { _.fullName.toString == "com.google.protobuf.Message" } =>
+        reprTypTree(t)
       case t => tq"$t"
     }
   }
