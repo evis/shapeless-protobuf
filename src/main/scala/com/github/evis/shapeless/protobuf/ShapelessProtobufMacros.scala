@@ -57,11 +57,12 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
         case "com.google.protobuf.MessageOrBuilder" => false
         case name => name.endsWith("OrBuilder")
       }
-    }.get.asType.toType.decls.sorted.collect { // TODO get may throw exception
-      case sym: TermSymbol
-        if sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName != "com.google.protobuf.ByteString" =>
-        sym
-    }
+    }.getOrElse(sys.error(s"$tpe isn't protobuf type: ${tpe}OrBuilder type not found"))
+      .asType.toType.decls.sorted.collect {
+        case sym: TermSymbol
+          if sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName != "com.google.protobuf.ByteString" =>
+          sym
+      }
   }
 
   def fieldsResultTypesOf(tpe: Type): List[Type] =
