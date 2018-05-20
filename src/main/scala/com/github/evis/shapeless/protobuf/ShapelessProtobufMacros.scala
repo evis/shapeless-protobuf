@@ -52,19 +52,34 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   }
 
   def fieldsOf(tpe: Type): List[TermSymbol] = {
-    tpe.baseClasses.find {
+    val allSyms = tpe.baseClasses.find {
       _.fullName match {
         case "com.google.protobuf.MessageOrBuilder" => false
         case name => name.endsWith("OrBuilder")
       }
     }.getOrElse(sys.error(s"$tpe isn't protobuf type: ${tpe}OrBuilder type not found"))
-      .asType.toType.decls.sorted.collect {
-        case sym: TermSymbol
-          // TODO byte string is perfectly valid for bytes type, must support it too
-          // for now we ignore it due to generated field for string type
-          if sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName != "com.google.protobuf.ByteString" =>
-          sym
+      .asType.toType.decls.sorted.collect { case sym: TermSymbol => sym }
+    // TODO refactor it
+    allSyms.filterNot { sym =>
+      val symName = sym.name.toString
+      sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName match {
+        case "com.google.protobuf.ByteString" =>
+          // ignore ByteString methods with Bytes suffix, generated for strings
+          symName.endsWith("Bytes") &&
+            allSyms.exists { sym =>
+              sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName.toString == "java.lang.String" &&
+                sym.name.toString == symName.replaceAll("Bytes$", "")
+            }
+        case "scala.Int" =>
+          // ignore int methods with Value suffix, generated for enums
+          symName.endsWith("Value") &&
+            allSyms.exists { sym =>
+              sym.typeSignatureIn(tpe).finalResultType.typeSymbol.isJavaEnum &&
+                sym.name.toString == symName.replaceAll("Value$", "")
+            }
+        case _ => false
       }
+    }
   }
 
   def fieldsResultTypesOf(tpe: Type): List[Type] =
