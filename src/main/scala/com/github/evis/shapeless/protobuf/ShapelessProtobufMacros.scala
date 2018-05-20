@@ -77,7 +77,17 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
               sym.typeSignatureIn(tpe).finalResultType.typeSymbol.isJavaEnum &&
                 sym.name.toString == symName.replaceAll("Value$", "")
             }
-        case _ => false
+        case "scala.Boolean" =>
+          // ignore methods for checking, if message contains inner message
+          symName.startsWith("has")
+        case _ =>
+          symName.endsWith("OrBuilder") &&
+            allSyms.exists { sym =>
+              sym.name.toString == symName.replaceAll("OrBuilder$", "") &&
+                sym.typeSignatureIn(tpe).finalResultType.baseClasses.exists {
+                  _.fullName.toString == "com.google.protobuf.Message"
+                }
+            }
       }
     }
   }
