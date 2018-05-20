@@ -51,6 +51,11 @@ public final class LittleFile {
      * <code>bytes my_bytes = 5;</code>
      */
     com.google.protobuf.ByteString getMyBytes();
+
+    /**
+     * <code>int32 my_value = 6;</code>
+     */
+    int getMyValue();
   }
   /**
    * Protobuf type {@code vertis.MyMessage}
@@ -70,6 +75,7 @@ public final class LittleFile {
       myBool_ = false;
       myEnum_ = 0;
       myBytes_ = com.google.protobuf.ByteString.EMPTY;
+      myValue_ = 0;
     }
 
     @java.lang.Override
@@ -128,6 +134,11 @@ public final class LittleFile {
             case 42: {
 
               myBytes_ = input.readBytes();
+              break;
+            }
+            case 48: {
+
+              myValue_ = input.readInt32();
               break;
             }
           }
@@ -347,6 +358,15 @@ public final class LittleFile {
       return myBytes_;
     }
 
+    public static final int MY_VALUE_FIELD_NUMBER = 6;
+    private int myValue_;
+    /**
+     * <code>int32 my_value = 6;</code>
+     */
+    public int getMyValue() {
+      return myValue_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -373,6 +393,9 @@ public final class LittleFile {
       }
       if (!myBytes_.isEmpty()) {
         output.writeBytes(5, myBytes_);
+      }
+      if (myValue_ != 0) {
+        output.writeInt32(6, myValue_);
       }
       unknownFields.writeTo(output);
     }
@@ -401,6 +424,10 @@ public final class LittleFile {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, myBytes_);
       }
+      if (myValue_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, myValue_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -426,6 +453,8 @@ public final class LittleFile {
       result = result && myEnum_ == other.myEnum_;
       result = result && getMyBytes()
           .equals(other.getMyBytes());
+      result = result && (getMyValue()
+          == other.getMyValue());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -448,6 +477,8 @@ public final class LittleFile {
       hash = (53 * hash) + myEnum_;
       hash = (37 * hash) + MY_BYTES_FIELD_NUMBER;
       hash = (53 * hash) + getMyBytes().hashCode();
+      hash = (37 * hash) + MY_VALUE_FIELD_NUMBER;
+      hash = (53 * hash) + getMyValue();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -587,6 +618,8 @@ public final class LittleFile {
 
         myBytes_ = com.google.protobuf.ByteString.EMPTY;
 
+        myValue_ = 0;
+
         return this;
       }
 
@@ -614,6 +647,7 @@ public final class LittleFile {
         result.myBool_ = myBool_;
         result.myEnum_ = myEnum_;
         result.myBytes_ = myBytes_;
+        result.myValue_ = myValue_;
         onBuilt();
         return result;
       }
@@ -670,6 +704,9 @@ public final class LittleFile {
         }
         if (other.getMyBytes() != com.google.protobuf.ByteString.EMPTY) {
           setMyBytes(other.getMyBytes());
+        }
+        if (other.getMyValue() != 0) {
+          setMyValue(other.getMyValue());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -891,6 +928,32 @@ public final class LittleFile {
         onChanged();
         return this;
       }
+
+      private int myValue_ ;
+      /**
+       * <code>int32 my_value = 6;</code>
+       */
+      public int getMyValue() {
+        return myValue_;
+      }
+      /**
+       * <code>int32 my_value = 6;</code>
+       */
+      public Builder setMyValue(int value) {
+        
+        myValue_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 my_value = 6;</code>
+       */
+      public Builder clearMyValue() {
+        
+        myValue_ = 0;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -954,13 +1017,13 @@ public final class LittleFile {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\030vertis/little_file.proto\022\006vertis\"\277\001\n\tM" +
+      "\n\030vertis/little_file.proto\022\006vertis\"\321\001\n\tM" +
       "yMessage\022\021\n\tmy_string\030\001 \001(\t\022\016\n\006my_int\030\002 " +
       "\001(\005\022\017\n\007my_bool\030\003 \001(\010\022)\n\007my_enum\030\004 \001(\0162\030." +
       "vertis.MyMessage.MyEnum\022\020\n\010my_bytes\030\005 \001(" +
-      "\014\"A\n\006MyEnum\022\013\n\007DEFAULT\020\000\022\014\n\010MY_VALUE\020\001\022\r" +
-      "\n\tHIS_VALUE\020\002\022\r\n\tHER_VALUE\020\003B\014\n\nproto.te" +
-      "stb\006proto3"
+      "\014\022\020\n\010my_value\030\006 \001(\005\"A\n\006MyEnum\022\013\n\007DEFAULT" +
+      "\020\000\022\014\n\010MY_VALUE\020\001\022\r\n\tHIS_VALUE\020\002\022\r\n\tHER_V" +
+      "ALUE\020\003B\014\n\nproto.testb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -979,7 +1042,7 @@ public final class LittleFile {
     internal_static_vertis_MyMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vertis_MyMessage_descriptor,
-        new java.lang.String[] { "MyString", "MyInt", "MyBool", "MyEnum", "MyBytes", });
+        new java.lang.String[] { "MyString", "MyInt", "MyBool", "MyEnum", "MyBytes", "MyValue", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
