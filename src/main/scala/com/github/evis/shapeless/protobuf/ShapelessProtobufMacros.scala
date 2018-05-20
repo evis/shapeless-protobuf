@@ -60,6 +60,8 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     }.getOrElse(sys.error(s"$tpe isn't protobuf type: ${tpe}OrBuilder type not found"))
       .asType.toType.decls.sorted.collect {
         case sym: TermSymbol
+          // TODO byte string is perfectly valid for bytes type, must support it too
+          // for now we ignore it due to generated field for string type
           if sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName != "com.google.protobuf.ByteString" =>
           sym
       }
