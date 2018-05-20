@@ -11,12 +11,13 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
     val to = mkHListValue(fieldsOf(tpe))
+    val from = mkFrom(tpe, fieldsOf(tpe))
     val clsName = TypeName(c.freshName("anon$"))
     q"""
       final class $clsName extends _root_.shapeless.Generic[$tpe] {
         type Repr = $repr
         def to(p: $tpe): Repr = $to
-        def from(p: Repr): $tpe = p match { case _root_.shapeless.::(s, _root_.shapeless.::(i, _root_.shapeless.::(b, _root_.shapeless.HNil))) => _root_.proto.test.LittleFile.MyMessage.newBuilder().setMyString(s).setMyInt(i).setMyBool(b).build() }
+        def from(p: Repr): $tpe = p match { case $from }
       }
       new $clsName(): _root_.shapeless.Generic.Aux[$tpe, $repr]
     """
@@ -34,6 +35,20 @@ class ShapelessProtobufMacros(val c: whitebox.Context) {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
       q"_root_.shapeless.::(p.$field, $acc)"
     }
+  }
+
+  def mkFrom(tpe: Type, fields: List[TermSymbol]): Tree = {
+    val bindings = fields.map { _ => TermName(c.freshName("pat")) }
+    val pattern = bindings.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
+      pq"_root_.shapeless.::($field, $acc)"
+    }
+    val builder = fields.zip(bindings).foldLeft(q"${tpe.companion}.newBuilder()": Tree) {
+      case (acc, (field, binding)) =>
+        val setterName = field.name.toString.replaceFirst("get", "set")
+        val setter = TermName(setterName)
+        q"$acc.$setter($binding)"
+    }
+    cq" $pattern => $builder.build()"
   }
 
   def fieldsOf(tpe: Type): List[TermSymbol] = {
