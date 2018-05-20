@@ -336,6 +336,11 @@ public final class LittleFile {
        */
       com.google.protobuf.ByteString
           getKeyValueBytes();
+
+      /**
+       * <code>int64 something_or_builder = 3;</code>
+       */
+      long getSomethingOrBuilder();
     }
     /**
      * Protobuf type {@code vertis.MyMessage.Inner}
@@ -352,6 +357,7 @@ public final class LittleFile {
       private Inner() {
         longValue_ = 0L;
         keyValue_ = "";
+        somethingOrBuilder_ = 0L;
       }
 
       @java.lang.Override
@@ -394,6 +400,11 @@ public final class LittleFile {
                 java.lang.String s = input.readStringRequireUtf8();
 
                 keyValue_ = s;
+                break;
+              }
+              case 24: {
+
+                somethingOrBuilder_ = input.readInt64();
                 break;
               }
             }
@@ -463,6 +474,15 @@ public final class LittleFile {
         }
       }
 
+      public static final int SOMETHING_OR_BUILDER_FIELD_NUMBER = 3;
+      private long somethingOrBuilder_;
+      /**
+       * <code>int64 something_or_builder = 3;</code>
+       */
+      public long getSomethingOrBuilder() {
+        return somethingOrBuilder_;
+      }
+
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
@@ -481,6 +501,9 @@ public final class LittleFile {
         if (!getKeyValueBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keyValue_);
         }
+        if (somethingOrBuilder_ != 0L) {
+          output.writeInt64(3, somethingOrBuilder_);
+        }
         unknownFields.writeTo(output);
       }
 
@@ -495,6 +518,10 @@ public final class LittleFile {
         }
         if (!getKeyValueBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, keyValue_);
+        }
+        if (somethingOrBuilder_ != 0L) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(3, somethingOrBuilder_);
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -516,6 +543,8 @@ public final class LittleFile {
             == other.getLongValue());
         result = result && getKeyValue()
             .equals(other.getKeyValue());
+        result = result && (getSomethingOrBuilder()
+            == other.getSomethingOrBuilder());
         result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
@@ -532,6 +561,9 @@ public final class LittleFile {
             getLongValue());
         hash = (37 * hash) + KEY_VALUE_FIELD_NUMBER;
         hash = (53 * hash) + getKeyValue().hashCode();
+        hash = (37 * hash) + SOMETHING_OR_BUILDER_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getSomethingOrBuilder());
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -665,6 +697,8 @@ public final class LittleFile {
 
           keyValue_ = "";
 
+          somethingOrBuilder_ = 0L;
+
           return this;
         }
 
@@ -689,6 +723,7 @@ public final class LittleFile {
           proto.test.LittleFile.MyMessage.Inner result = new proto.test.LittleFile.MyMessage.Inner(this);
           result.longValue_ = longValue_;
           result.keyValue_ = keyValue_;
+          result.somethingOrBuilder_ = somethingOrBuilder_;
           onBuilt();
           return result;
         }
@@ -736,6 +771,9 @@ public final class LittleFile {
           if (!other.getKeyValue().isEmpty()) {
             keyValue_ = other.keyValue_;
             onChanged();
+          }
+          if (other.getSomethingOrBuilder() != 0L) {
+            setSomethingOrBuilder(other.getSomethingOrBuilder());
           }
           this.mergeUnknownFields(other.unknownFields);
           onChanged();
@@ -855,6 +893,32 @@ public final class LittleFile {
   checkByteStringIsUtf8(value);
           
           keyValue_ = value;
+          onChanged();
+          return this;
+        }
+
+        private long somethingOrBuilder_ ;
+        /**
+         * <code>int64 something_or_builder = 3;</code>
+         */
+        public long getSomethingOrBuilder() {
+          return somethingOrBuilder_;
+        }
+        /**
+         * <code>int64 something_or_builder = 3;</code>
+         */
+        public Builder setSomethingOrBuilder(long value) {
+          
+          somethingOrBuilder_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>int64 something_or_builder = 3;</code>
+         */
+        public Builder clearSomethingOrBuilder() {
+          
+          somethingOrBuilder_ = 0L;
           onChanged();
           return this;
         }
@@ -1871,16 +1935,17 @@ public final class LittleFile {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\030vertis/little_file.proto\022\006vertis\"\277\002\n\tM" +
+      "\n\030vertis/little_file.proto\022\006vertis\"\335\002\n\tM" +
       "yMessage\022\021\n\tmy_string\030\001 \001(\t\022\016\n\006my_int\030\002 " +
       "\001(\005\022\017\n\007my_bool\030\003 \001(\010\022)\n\007my_enum\030\004 \001(\0162\030." +
       "vertis.MyMessage.MyEnum\022\020\n\010my_bytes\030\005 \001(" +
       "\014\022\020\n\010my_value\030\006 \001(\005\022\024\n\014my_int_bytes\030\007 \001(" +
       "\014\022&\n\005inner\030\010 \001(\0132\027.vertis.MyMessage.Inne" +
-      "r\032.\n\005Inner\022\022\n\nlong_value\030\001 \001(\003\022\021\n\tkey_va" +
-      "lue\030\002 \001(\t\"A\n\006MyEnum\022\013\n\007DEFAULT\020\000\022\014\n\010MY_V" +
-      "ALUE\020\001\022\r\n\tHIS_VALUE\020\002\022\r\n\tHER_VALUE\020\003B\014\n\n" +
-      "proto.testb\006proto3"
+      "r\032L\n\005Inner\022\022\n\nlong_value\030\001 \001(\003\022\021\n\tkey_va" +
+      "lue\030\002 \001(\t\022\034\n\024something_or_builder\030\003 \001(\003\"" +
+      "A\n\006MyEnum\022\013\n\007DEFAULT\020\000\022\014\n\010MY_VALUE\020\001\022\r\n\t" +
+      "HIS_VALUE\020\002\022\r\n\tHER_VALUE\020\003B\014\n\nproto.test" +
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1905,7 +1970,7 @@ public final class LittleFile {
     internal_static_vertis_MyMessage_Inner_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_vertis_MyMessage_Inner_descriptor,
-        new java.lang.String[] { "LongValue", "KeyValue", });
+        new java.lang.String[] { "LongValue", "KeyValue", "SomethingOrBuilder", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

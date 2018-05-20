@@ -18,7 +18,7 @@ object Main extends App {
     ByteString ::
     Int ::
     ByteString ::
-      (Long :: String :: HNil) ::
+      (Long :: String :: Long :: HNil) ::
     HNil
   ]
 
@@ -32,7 +32,7 @@ object Main extends App {
           ByteString.copyFrom("hello bytes", "UTF-8") ::
           9999 ::
           ByteString.copyFrom("hello my int bytes", "UTF-8") ::
-          (56L :: "inner val" :: HNil) ::
+          (56L :: "inner val" :: 100000L :: HNil) ::
           HNil
       )
   }
@@ -48,7 +48,7 @@ object Main extends App {
           .setMyBytes(ByteString.copyFrom("hello bytes", "UTF-8"))
           .setMyValue(9999)
           .setMyIntBytes(ByteString.copyFrom("hello my int bytes", "UTF-8"))
-          .setInner(Inner.newBuilder().setLongValue(56L).setKeyValue("inner val"))
+          .setInner(Inner.newBuilder().setLongValue(56L).setKeyValue("inner val").setSomethingOrBuilder(100000L))
           .build()
       )
   }
