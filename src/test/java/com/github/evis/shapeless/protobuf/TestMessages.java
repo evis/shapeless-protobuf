@@ -50,7 +50,7 @@ public final class TestMessages {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -59,7 +59,7 @@ public final class TestMessages {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static TestEnum valueOf(int value) {
       return forNumber(value);
     }
@@ -95,7 +95,7 @@ public final class TestMessages {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.github.evis.shapeless.protobuf.TestMessages.getDescriptor().getEnumTypes().get(0);
+      return TestMessages.getDescriptor().getEnumTypes().get(0);
     }
 
     private static final TestEnum[] VALUES = values();
@@ -103,7 +103,7 @@ public final class TestMessages {
     public static TestEnum valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
           "EnumValueDescriptor is not for this type.");
       }
       if (desc.getIndex() == -1) {
@@ -128,7 +128,7 @@ public final class TestMessages {
     /**
      * <code>string test_string = 1;</code>
      */
-    java.lang.String getTestString();
+    String getTestString();
     /**
      * <code>string test_string = 1;</code>
      */
@@ -169,7 +169,7 @@ public final class TestMessages {
       testBool_ = false;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -180,7 +180,7 @@ public final class TestMessages {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
+        throw new NullPointerException();
       }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -201,7 +201,7 @@ public final class TestMessages {
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testString_ = s;
               break;
@@ -235,29 +235,29 @@ public final class TestMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Primitives_descriptor;
+      return TestMessages.internal_static_Primitives_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Primitives_fieldAccessorTable
+      return TestMessages.internal_static_Primitives_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.github.evis.shapeless.protobuf.TestMessages.Primitives.class, com.github.evis.shapeless.protobuf.TestMessages.Primitives.Builder.class);
+              TestMessages.Primitives.class, TestMessages.Primitives.Builder.class);
     }
 
     public static final int TEST_STRING_FIELD_NUMBER = 1;
-    private volatile java.lang.Object testString_;
+    private volatile Object testString_;
     /**
      * <code>string test_string = 1;</code>
      */
-    public java.lang.String getTestString() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestString() {
+      Object ref = testString_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testString_ = s;
         return s;
       }
@@ -267,11 +267,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestStringBytes() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testString_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testString_ = b;
         return b;
       } else {
@@ -358,15 +358,15 @@ public final class TestMessages {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.github.evis.shapeless.protobuf.TestMessages.Primitives)) {
+      if (!(obj instanceof TestMessages.Primitives)) {
         return super.equals(obj);
       }
-      com.github.evis.shapeless.protobuf.TestMessages.Primitives other = (com.github.evis.shapeless.protobuf.TestMessages.Primitives) obj;
+      TestMessages.Primitives other = (TestMessages.Primitives) obj;
 
       boolean result = true;
       result = result && getTestString()
@@ -381,7 +381,7 @@ public final class TestMessages {
       return result;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -403,69 +403,69 @@ public final class TestMessages {
       return hash;
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(
+    public static TestMessages.Primitives parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(
+    public static TestMessages.Primitives parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(
+    public static TestMessages.Primitives parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(
+    public static TestMessages.Primitives parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(byte[] data)
+    public static TestMessages.Primitives parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(
+    public static TestMessages.Primitives parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(java.io.InputStream input)
+    public static TestMessages.Primitives parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(
+    public static TestMessages.Primitives parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseDelimitedFrom(java.io.InputStream input)
+    public static TestMessages.Primitives parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseDelimitedFrom(
+    public static TestMessages.Primitives parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(
+    public static TestMessages.Primitives parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives parseFrom(
+    public static TestMessages.Primitives parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -477,7 +477,7 @@ public final class TestMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.github.evis.shapeless.protobuf.TestMessages.Primitives prototype) {
+    public static Builder newBuilder(TestMessages.Primitives prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -485,9 +485,9 @@ public final class TestMessages {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -497,26 +497,26 @@ public final class TestMessages {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:Primitives)
-        com.github.evis.shapeless.protobuf.TestMessages.PrimitivesOrBuilder {
+        TestMessages.PrimitivesOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Primitives_descriptor;
+        return TestMessages.internal_static_Primitives_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Primitives_fieldAccessorTable
+        return TestMessages.internal_static_Primitives_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.github.evis.shapeless.protobuf.TestMessages.Primitives.class, com.github.evis.shapeless.protobuf.TestMessages.Primitives.Builder.class);
+                TestMessages.Primitives.class, TestMessages.Primitives.Builder.class);
       }
 
-      // Construct using com.github.evis.shapeless.protobuf.TestMessages.Primitives.newBuilder()
+      // Construct using TestMessages.Primitives.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -540,23 +540,23 @@ public final class TestMessages {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Primitives_descriptor;
+        return TestMessages.internal_static_Primitives_descriptor;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Primitives getDefaultInstanceForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.Primitives.getDefaultInstance();
+      public TestMessages.Primitives getDefaultInstanceForType() {
+        return TestMessages.Primitives.getDefaultInstance();
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Primitives build() {
-        com.github.evis.shapeless.protobuf.TestMessages.Primitives result = buildPartial();
+      public TestMessages.Primitives build() {
+        TestMessages.Primitives result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Primitives buildPartial() {
-        com.github.evis.shapeless.protobuf.TestMessages.Primitives result = new com.github.evis.shapeless.protobuf.TestMessages.Primitives(this);
+      public TestMessages.Primitives buildPartial() {
+        TestMessages.Primitives result = new TestMessages.Primitives(this);
         result.testString_ = testString_;
         result.testInt_ = testInt_;
         result.testLong_ = testLong_;
@@ -570,7 +570,7 @@ public final class TestMessages {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -583,25 +583,25 @@ public final class TestMessages {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.github.evis.shapeless.protobuf.TestMessages.Primitives) {
-          return mergeFrom((com.github.evis.shapeless.protobuf.TestMessages.Primitives)other);
+        if (other instanceof TestMessages.Primitives) {
+          return mergeFrom((TestMessages.Primitives)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.github.evis.shapeless.protobuf.TestMessages.Primitives other) {
-        if (other == com.github.evis.shapeless.protobuf.TestMessages.Primitives.getDefaultInstance()) return this;
+      public Builder mergeFrom(TestMessages.Primitives other) {
+        if (other == TestMessages.Primitives.getDefaultInstance()) return this;
         if (!other.getTestString().isEmpty()) {
           testString_ = other.testString_;
           onChanged();
@@ -628,11 +628,11 @@ public final class TestMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.evis.shapeless.protobuf.TestMessages.Primitives parsedMessage = null;
+        TestMessages.Primitives parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.evis.shapeless.protobuf.TestMessages.Primitives) e.getUnfinishedMessage();
+          parsedMessage = (TestMessages.Primitives) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -642,20 +642,20 @@ public final class TestMessages {
         return this;
       }
 
-      private java.lang.Object testString_ = "";
+      private Object testString_ = "";
       /**
        * <code>string test_string = 1;</code>
        */
-      public java.lang.String getTestString() {
-        java.lang.Object ref = testString_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestString() {
+        Object ref = testString_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testString_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -663,11 +663,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestStringBytes() {
-        java.lang.Object ref = testString_;
+        Object ref = testString_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testString_ = b;
           return b;
         } else {
@@ -678,11 +678,11 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder setTestString(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testString_ = value;
         onChanged();
         return this;
@@ -691,7 +691,7 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder clearTestString() {
-        
+
         testString_ = getDefaultInstance().getTestString();
         onChanged();
         return this;
@@ -705,7 +705,7 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testString_ = value;
         onChanged();
         return this;
@@ -722,7 +722,7 @@ public final class TestMessages {
        * <code>int32 test_int = 2;</code>
        */
       public Builder setTestInt(int value) {
-        
+
         testInt_ = value;
         onChanged();
         return this;
@@ -731,7 +731,7 @@ public final class TestMessages {
        * <code>int32 test_int = 2;</code>
        */
       public Builder clearTestInt() {
-        
+
         testInt_ = 0;
         onChanged();
         return this;
@@ -748,7 +748,7 @@ public final class TestMessages {
        * <code>int64 test_long = 3;</code>
        */
       public Builder setTestLong(long value) {
-        
+
         testLong_ = value;
         onChanged();
         return this;
@@ -757,7 +757,7 @@ public final class TestMessages {
        * <code>int64 test_long = 3;</code>
        */
       public Builder clearTestLong() {
-        
+
         testLong_ = 0L;
         onChanged();
         return this;
@@ -774,7 +774,7 @@ public final class TestMessages {
        * <code>bool test_bool = 4;</code>
        */
       public Builder setTestBool(boolean value) {
-        
+
         testBool_ = value;
         onChanged();
         return this;
@@ -783,7 +783,7 @@ public final class TestMessages {
        * <code>bool test_bool = 4;</code>
        */
       public Builder clearTestBool() {
-        
+
         testBool_ = false;
         onChanged();
         return this;
@@ -803,12 +803,12 @@ public final class TestMessages {
     }
 
     // @@protoc_insertion_point(class_scope:Primitives)
-    private static final com.github.evis.shapeless.protobuf.TestMessages.Primitives DEFAULT_INSTANCE;
+    private static final TestMessages.Primitives DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.github.evis.shapeless.protobuf.TestMessages.Primitives();
+      DEFAULT_INSTANCE = new TestMessages.Primitives();
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.Primitives getDefaultInstance() {
+    public static TestMessages.Primitives getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -826,12 +826,12 @@ public final class TestMessages {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<Primitives> getParserForType() {
       return PARSER;
     }
 
-    public com.github.evis.shapeless.protobuf.TestMessages.Primitives getDefaultInstanceForType() {
+    public TestMessages.Primitives getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -844,7 +844,7 @@ public final class TestMessages {
     /**
      * <code>string test_string = 1;</code>
      */
-    java.lang.String getTestString();
+    String getTestString();
     /**
      * <code>string test_string = 1;</code>
      */
@@ -858,7 +858,7 @@ public final class TestMessages {
     /**
      * <code>.TestEnum test_enum = 2;</code>
      */
-    com.github.evis.shapeless.protobuf.TestMessages.TestEnum getTestEnum();
+    TestMessages.TestEnum getTestEnum();
   }
   /**
    * Protobuf type {@code WithEnum}
@@ -877,7 +877,7 @@ public final class TestMessages {
       testEnum_ = 0;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -888,7 +888,7 @@ public final class TestMessages {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
+        throw new NullPointerException();
       }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -909,7 +909,7 @@ public final class TestMessages {
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testString_ = s;
               break;
@@ -934,29 +934,29 @@ public final class TestMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnum_descriptor;
+      return TestMessages.internal_static_WithEnum_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnum_fieldAccessorTable
+      return TestMessages.internal_static_WithEnum_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.github.evis.shapeless.protobuf.TestMessages.WithEnum.class, com.github.evis.shapeless.protobuf.TestMessages.WithEnum.Builder.class);
+              TestMessages.WithEnum.class, TestMessages.WithEnum.Builder.class);
     }
 
     public static final int TEST_STRING_FIELD_NUMBER = 1;
-    private volatile java.lang.Object testString_;
+    private volatile Object testString_;
     /**
      * <code>string test_string = 1;</code>
      */
-    public java.lang.String getTestString() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestString() {
+      Object ref = testString_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testString_ = s;
         return s;
       }
@@ -966,11 +966,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestStringBytes() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testString_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testString_ = b;
         return b;
       } else {
@@ -989,9 +989,9 @@ public final class TestMessages {
     /**
      * <code>.TestEnum test_enum = 2;</code>
      */
-    public com.github.evis.shapeless.protobuf.TestMessages.TestEnum getTestEnum() {
-      com.github.evis.shapeless.protobuf.TestMessages.TestEnum result = com.github.evis.shapeless.protobuf.TestMessages.TestEnum.valueOf(testEnum_);
-      return result == null ? com.github.evis.shapeless.protobuf.TestMessages.TestEnum.UNRECOGNIZED : result;
+    public TestMessages.TestEnum getTestEnum() {
+      TestMessages.TestEnum result = TestMessages.TestEnum.valueOf(testEnum_);
+      return result == null ? TestMessages.TestEnum.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1009,7 +1009,7 @@ public final class TestMessages {
       if (!getTestStringBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, testString_);
       }
-      if (testEnum_ != com.github.evis.shapeless.protobuf.TestMessages.TestEnum.TEST_DEFAULT.getNumber()) {
+      if (testEnum_ != TestMessages.TestEnum.TEST_DEFAULT.getNumber()) {
         output.writeEnum(2, testEnum_);
       }
       unknownFields.writeTo(output);
@@ -1023,7 +1023,7 @@ public final class TestMessages {
       if (!getTestStringBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, testString_);
       }
-      if (testEnum_ != com.github.evis.shapeless.protobuf.TestMessages.TestEnum.TEST_DEFAULT.getNumber()) {
+      if (testEnum_ != TestMessages.TestEnum.TEST_DEFAULT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, testEnum_);
       }
@@ -1032,15 +1032,15 @@ public final class TestMessages {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.github.evis.shapeless.protobuf.TestMessages.WithEnum)) {
+      if (!(obj instanceof TestMessages.WithEnum)) {
         return super.equals(obj);
       }
-      com.github.evis.shapeless.protobuf.TestMessages.WithEnum other = (com.github.evis.shapeless.protobuf.TestMessages.WithEnum) obj;
+      TestMessages.WithEnum other = (TestMessages.WithEnum) obj;
 
       boolean result = true;
       result = result && getTestString()
@@ -1050,7 +1050,7 @@ public final class TestMessages {
       return result;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -1066,69 +1066,69 @@ public final class TestMessages {
       return hash;
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(
+    public static TestMessages.WithEnum parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(
+    public static TestMessages.WithEnum parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(
+    public static TestMessages.WithEnum parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(
+    public static TestMessages.WithEnum parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(byte[] data)
+    public static TestMessages.WithEnum parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(
+    public static TestMessages.WithEnum parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(java.io.InputStream input)
+    public static TestMessages.WithEnum parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(
+    public static TestMessages.WithEnum parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseDelimitedFrom(java.io.InputStream input)
+    public static TestMessages.WithEnum parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseDelimitedFrom(
+    public static TestMessages.WithEnum parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(
+    public static TestMessages.WithEnum parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum parseFrom(
+    public static TestMessages.WithEnum parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1140,7 +1140,7 @@ public final class TestMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.github.evis.shapeless.protobuf.TestMessages.WithEnum prototype) {
+    public static Builder newBuilder(TestMessages.WithEnum prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -1148,9 +1148,9 @@ public final class TestMessages {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1160,26 +1160,26 @@ public final class TestMessages {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:WithEnum)
-        com.github.evis.shapeless.protobuf.TestMessages.WithEnumOrBuilder {
+        TestMessages.WithEnumOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnum_descriptor;
+        return TestMessages.internal_static_WithEnum_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnum_fieldAccessorTable
+        return TestMessages.internal_static_WithEnum_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.github.evis.shapeless.protobuf.TestMessages.WithEnum.class, com.github.evis.shapeless.protobuf.TestMessages.WithEnum.Builder.class);
+                TestMessages.WithEnum.class, TestMessages.WithEnum.Builder.class);
       }
 
-      // Construct using com.github.evis.shapeless.protobuf.TestMessages.WithEnum.newBuilder()
+      // Construct using TestMessages.WithEnum.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1199,23 +1199,23 @@ public final class TestMessages {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnum_descriptor;
+        return TestMessages.internal_static_WithEnum_descriptor;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithEnum getDefaultInstanceForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.WithEnum.getDefaultInstance();
+      public TestMessages.WithEnum getDefaultInstanceForType() {
+        return TestMessages.WithEnum.getDefaultInstance();
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithEnum build() {
-        com.github.evis.shapeless.protobuf.TestMessages.WithEnum result = buildPartial();
+      public TestMessages.WithEnum build() {
+        TestMessages.WithEnum result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithEnum buildPartial() {
-        com.github.evis.shapeless.protobuf.TestMessages.WithEnum result = new com.github.evis.shapeless.protobuf.TestMessages.WithEnum(this);
+      public TestMessages.WithEnum buildPartial() {
+        TestMessages.WithEnum result = new TestMessages.WithEnum(this);
         result.testString_ = testString_;
         result.testEnum_ = testEnum_;
         onBuilt();
@@ -1227,7 +1227,7 @@ public final class TestMessages {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1240,25 +1240,25 @@ public final class TestMessages {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.github.evis.shapeless.protobuf.TestMessages.WithEnum) {
-          return mergeFrom((com.github.evis.shapeless.protobuf.TestMessages.WithEnum)other);
+        if (other instanceof TestMessages.WithEnum) {
+          return mergeFrom((TestMessages.WithEnum)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.github.evis.shapeless.protobuf.TestMessages.WithEnum other) {
-        if (other == com.github.evis.shapeless.protobuf.TestMessages.WithEnum.getDefaultInstance()) return this;
+      public Builder mergeFrom(TestMessages.WithEnum other) {
+        if (other == TestMessages.WithEnum.getDefaultInstance()) return this;
         if (!other.getTestString().isEmpty()) {
           testString_ = other.testString_;
           onChanged();
@@ -1279,11 +1279,11 @@ public final class TestMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.evis.shapeless.protobuf.TestMessages.WithEnum parsedMessage = null;
+        TestMessages.WithEnum parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.evis.shapeless.protobuf.TestMessages.WithEnum) e.getUnfinishedMessage();
+          parsedMessage = (TestMessages.WithEnum) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1293,20 +1293,20 @@ public final class TestMessages {
         return this;
       }
 
-      private java.lang.Object testString_ = "";
+      private Object testString_ = "";
       /**
        * <code>string test_string = 1;</code>
        */
-      public java.lang.String getTestString() {
-        java.lang.Object ref = testString_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestString() {
+        Object ref = testString_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testString_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -1314,11 +1314,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestStringBytes() {
-        java.lang.Object ref = testString_;
+        Object ref = testString_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testString_ = b;
           return b;
         } else {
@@ -1329,11 +1329,11 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder setTestString(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testString_ = value;
         onChanged();
         return this;
@@ -1342,7 +1342,7 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder clearTestString() {
-        
+
         testString_ = getDefaultInstance().getTestString();
         onChanged();
         return this;
@@ -1356,7 +1356,7 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testString_ = value;
         onChanged();
         return this;
@@ -1380,18 +1380,18 @@ public final class TestMessages {
       /**
        * <code>.TestEnum test_enum = 2;</code>
        */
-      public com.github.evis.shapeless.protobuf.TestMessages.TestEnum getTestEnum() {
-        com.github.evis.shapeless.protobuf.TestMessages.TestEnum result = com.github.evis.shapeless.protobuf.TestMessages.TestEnum.valueOf(testEnum_);
-        return result == null ? com.github.evis.shapeless.protobuf.TestMessages.TestEnum.UNRECOGNIZED : result;
+      public TestMessages.TestEnum getTestEnum() {
+        TestMessages.TestEnum result = TestMessages.TestEnum.valueOf(testEnum_);
+        return result == null ? TestMessages.TestEnum.UNRECOGNIZED : result;
       }
       /**
        * <code>.TestEnum test_enum = 2;</code>
        */
-      public Builder setTestEnum(com.github.evis.shapeless.protobuf.TestMessages.TestEnum value) {
+      public Builder setTestEnum(TestMessages.TestEnum value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        
+
         testEnum_ = value.getNumber();
         onChanged();
         return this;
@@ -1400,7 +1400,7 @@ public final class TestMessages {
        * <code>.TestEnum test_enum = 2;</code>
        */
       public Builder clearTestEnum() {
-        
+
         testEnum_ = 0;
         onChanged();
         return this;
@@ -1420,12 +1420,12 @@ public final class TestMessages {
     }
 
     // @@protoc_insertion_point(class_scope:WithEnum)
-    private static final com.github.evis.shapeless.protobuf.TestMessages.WithEnum DEFAULT_INSTANCE;
+    private static final TestMessages.WithEnum DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.github.evis.shapeless.protobuf.TestMessages.WithEnum();
+      DEFAULT_INSTANCE = new TestMessages.WithEnum();
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnum getDefaultInstance() {
+    public static TestMessages.WithEnum getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1443,12 +1443,12 @@ public final class TestMessages {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<WithEnum> getParserForType() {
       return PARSER;
     }
 
-    public com.github.evis.shapeless.protobuf.TestMessages.WithEnum getDefaultInstanceForType() {
+    public TestMessages.WithEnum getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1461,7 +1461,7 @@ public final class TestMessages {
     /**
      * <code>string test_string = 1;</code>
      */
-    java.lang.String getTestString();
+    String getTestString();
     /**
      * <code>string test_string = 1;</code>
      */
@@ -1490,7 +1490,7 @@ public final class TestMessages {
       testBytes_ = com.google.protobuf.ByteString.EMPTY;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -1501,7 +1501,7 @@ public final class TestMessages {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
+        throw new NullPointerException();
       }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -1522,7 +1522,7 @@ public final class TestMessages {
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testString_ = s;
               break;
@@ -1546,29 +1546,29 @@ public final class TestMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytes_descriptor;
+      return TestMessages.internal_static_WithBytes_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytes_fieldAccessorTable
+      return TestMessages.internal_static_WithBytes_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.github.evis.shapeless.protobuf.TestMessages.WithBytes.class, com.github.evis.shapeless.protobuf.TestMessages.WithBytes.Builder.class);
+              TestMessages.WithBytes.class, TestMessages.WithBytes.Builder.class);
     }
 
     public static final int TEST_STRING_FIELD_NUMBER = 1;
-    private volatile java.lang.Object testString_;
+    private volatile Object testString_;
     /**
      * <code>string test_string = 1;</code>
      */
-    public java.lang.String getTestString() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestString() {
+      Object ref = testString_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testString_ = s;
         return s;
       }
@@ -1578,11 +1578,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestStringBytes() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testString_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testString_ = b;
         return b;
       } else {
@@ -1637,15 +1637,15 @@ public final class TestMessages {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.github.evis.shapeless.protobuf.TestMessages.WithBytes)) {
+      if (!(obj instanceof TestMessages.WithBytes)) {
         return super.equals(obj);
       }
-      com.github.evis.shapeless.protobuf.TestMessages.WithBytes other = (com.github.evis.shapeless.protobuf.TestMessages.WithBytes) obj;
+      TestMessages.WithBytes other = (TestMessages.WithBytes) obj;
 
       boolean result = true;
       result = result && getTestString()
@@ -1656,7 +1656,7 @@ public final class TestMessages {
       return result;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -1672,69 +1672,69 @@ public final class TestMessages {
       return hash;
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(
+    public static TestMessages.WithBytes parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(
+    public static TestMessages.WithBytes parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(
+    public static TestMessages.WithBytes parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(
+    public static TestMessages.WithBytes parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(byte[] data)
+    public static TestMessages.WithBytes parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(
+    public static TestMessages.WithBytes parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(java.io.InputStream input)
+    public static TestMessages.WithBytes parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(
+    public static TestMessages.WithBytes parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseDelimitedFrom(java.io.InputStream input)
+    public static TestMessages.WithBytes parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseDelimitedFrom(
+    public static TestMessages.WithBytes parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(
+    public static TestMessages.WithBytes parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes parseFrom(
+    public static TestMessages.WithBytes parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1746,7 +1746,7 @@ public final class TestMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.github.evis.shapeless.protobuf.TestMessages.WithBytes prototype) {
+    public static Builder newBuilder(TestMessages.WithBytes prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -1754,9 +1754,9 @@ public final class TestMessages {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1766,26 +1766,26 @@ public final class TestMessages {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:WithBytes)
-        com.github.evis.shapeless.protobuf.TestMessages.WithBytesOrBuilder {
+        TestMessages.WithBytesOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytes_descriptor;
+        return TestMessages.internal_static_WithBytes_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytes_fieldAccessorTable
+        return TestMessages.internal_static_WithBytes_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.github.evis.shapeless.protobuf.TestMessages.WithBytes.class, com.github.evis.shapeless.protobuf.TestMessages.WithBytes.Builder.class);
+                TestMessages.WithBytes.class, TestMessages.WithBytes.Builder.class);
       }
 
-      // Construct using com.github.evis.shapeless.protobuf.TestMessages.WithBytes.newBuilder()
+      // Construct using TestMessages.WithBytes.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1805,23 +1805,23 @@ public final class TestMessages {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytes_descriptor;
+        return TestMessages.internal_static_WithBytes_descriptor;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithBytes getDefaultInstanceForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.WithBytes.getDefaultInstance();
+      public TestMessages.WithBytes getDefaultInstanceForType() {
+        return TestMessages.WithBytes.getDefaultInstance();
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithBytes build() {
-        com.github.evis.shapeless.protobuf.TestMessages.WithBytes result = buildPartial();
+      public TestMessages.WithBytes build() {
+        TestMessages.WithBytes result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithBytes buildPartial() {
-        com.github.evis.shapeless.protobuf.TestMessages.WithBytes result = new com.github.evis.shapeless.protobuf.TestMessages.WithBytes(this);
+      public TestMessages.WithBytes buildPartial() {
+        TestMessages.WithBytes result = new TestMessages.WithBytes(this);
         result.testString_ = testString_;
         result.testBytes_ = testBytes_;
         onBuilt();
@@ -1833,7 +1833,7 @@ public final class TestMessages {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1846,25 +1846,25 @@ public final class TestMessages {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.github.evis.shapeless.protobuf.TestMessages.WithBytes) {
-          return mergeFrom((com.github.evis.shapeless.protobuf.TestMessages.WithBytes)other);
+        if (other instanceof TestMessages.WithBytes) {
+          return mergeFrom((TestMessages.WithBytes)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.github.evis.shapeless.protobuf.TestMessages.WithBytes other) {
-        if (other == com.github.evis.shapeless.protobuf.TestMessages.WithBytes.getDefaultInstance()) return this;
+      public Builder mergeFrom(TestMessages.WithBytes other) {
+        if (other == TestMessages.WithBytes.getDefaultInstance()) return this;
         if (!other.getTestString().isEmpty()) {
           testString_ = other.testString_;
           onChanged();
@@ -1885,11 +1885,11 @@ public final class TestMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.evis.shapeless.protobuf.TestMessages.WithBytes parsedMessage = null;
+        TestMessages.WithBytes parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.evis.shapeless.protobuf.TestMessages.WithBytes) e.getUnfinishedMessage();
+          parsedMessage = (TestMessages.WithBytes) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1899,20 +1899,20 @@ public final class TestMessages {
         return this;
       }
 
-      private java.lang.Object testString_ = "";
+      private Object testString_ = "";
       /**
        * <code>string test_string = 1;</code>
        */
-      public java.lang.String getTestString() {
-        java.lang.Object ref = testString_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestString() {
+        Object ref = testString_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testString_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -1920,11 +1920,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestStringBytes() {
-        java.lang.Object ref = testString_;
+        Object ref = testString_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testString_ = b;
           return b;
         } else {
@@ -1935,11 +1935,11 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder setTestString(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testString_ = value;
         onChanged();
         return this;
@@ -1948,7 +1948,7 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder clearTestString() {
-        
+
         testString_ = getDefaultInstance().getTestString();
         onChanged();
         return this;
@@ -1962,7 +1962,7 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testString_ = value;
         onChanged();
         return this;
@@ -1982,7 +1982,7 @@ public final class TestMessages {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testBytes_ = value;
         onChanged();
         return this;
@@ -1991,7 +1991,7 @@ public final class TestMessages {
        * <code>bytes test_bytes = 2;</code>
        */
       public Builder clearTestBytes() {
-        
+
         testBytes_ = getDefaultInstance().getTestBytes();
         onChanged();
         return this;
@@ -2011,12 +2011,12 @@ public final class TestMessages {
     }
 
     // @@protoc_insertion_point(class_scope:WithBytes)
-    private static final com.github.evis.shapeless.protobuf.TestMessages.WithBytes DEFAULT_INSTANCE;
+    private static final TestMessages.WithBytes DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.github.evis.shapeless.protobuf.TestMessages.WithBytes();
+      DEFAULT_INSTANCE = new TestMessages.WithBytes();
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytes getDefaultInstance() {
+    public static TestMessages.WithBytes getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2034,12 +2034,12 @@ public final class TestMessages {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<WithBytes> getParserForType() {
       return PARSER;
     }
 
-    public com.github.evis.shapeless.protobuf.TestMessages.WithBytes getDefaultInstanceForType() {
+    public TestMessages.WithBytes getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2052,7 +2052,7 @@ public final class TestMessages {
     /**
      * <code>string test_string = 1;</code>
      */
-    java.lang.String getTestString();
+    String getTestString();
     /**
      * <code>string test_string = 1;</code>
      */
@@ -2066,12 +2066,12 @@ public final class TestMessages {
     /**
      * <code>.TestEnum test_enum = 2;</code>
      */
-    com.github.evis.shapeless.protobuf.TestMessages.TestEnum getTestEnum();
+    TestMessages.TestEnum getTestEnum();
 
     /**
      * <code>string test_value = 3;</code>
      */
-    java.lang.String getTestValue();
+    String getTestValue();
     /**
      * <code>string test_value = 3;</code>
      */
@@ -2096,7 +2096,7 @@ public final class TestMessages {
       testValue_ = "";
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -2107,7 +2107,7 @@ public final class TestMessages {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
+        throw new NullPointerException();
       }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -2128,7 +2128,7 @@ public final class TestMessages {
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testString_ = s;
               break;
@@ -2140,7 +2140,7 @@ public final class TestMessages {
               break;
             }
             case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testValue_ = s;
               break;
@@ -2159,29 +2159,29 @@ public final class TestMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnumAndValue_descriptor;
+      return TestMessages.internal_static_WithEnumAndValue_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnumAndValue_fieldAccessorTable
+      return TestMessages.internal_static_WithEnumAndValue_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue.class, com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue.Builder.class);
+              TestMessages.WithEnumAndValue.class, TestMessages.WithEnumAndValue.Builder.class);
     }
 
     public static final int TEST_STRING_FIELD_NUMBER = 1;
-    private volatile java.lang.Object testString_;
+    private volatile Object testString_;
     /**
      * <code>string test_string = 1;</code>
      */
-    public java.lang.String getTestString() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestString() {
+      Object ref = testString_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testString_ = s;
         return s;
       }
@@ -2191,11 +2191,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestStringBytes() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testString_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testString_ = b;
         return b;
       } else {
@@ -2214,24 +2214,24 @@ public final class TestMessages {
     /**
      * <code>.TestEnum test_enum = 2;</code>
      */
-    public com.github.evis.shapeless.protobuf.TestMessages.TestEnum getTestEnum() {
-      com.github.evis.shapeless.protobuf.TestMessages.TestEnum result = com.github.evis.shapeless.protobuf.TestMessages.TestEnum.valueOf(testEnum_);
-      return result == null ? com.github.evis.shapeless.protobuf.TestMessages.TestEnum.UNRECOGNIZED : result;
+    public TestMessages.TestEnum getTestEnum() {
+      TestMessages.TestEnum result = TestMessages.TestEnum.valueOf(testEnum_);
+      return result == null ? TestMessages.TestEnum.UNRECOGNIZED : result;
     }
 
     public static final int TEST_VALUE_FIELD_NUMBER = 3;
-    private volatile java.lang.Object testValue_;
+    private volatile Object testValue_;
     /**
      * <code>string test_value = 3;</code>
      */
-    public java.lang.String getTestValue() {
-      java.lang.Object ref = testValue_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestValue() {
+      Object ref = testValue_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testValue_ = s;
         return s;
       }
@@ -2241,11 +2241,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestValueBytes() {
-      java.lang.Object ref = testValue_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testValue_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testValue_ = b;
         return b;
       } else {
@@ -2268,7 +2268,7 @@ public final class TestMessages {
       if (!getTestStringBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, testString_);
       }
-      if (testEnum_ != com.github.evis.shapeless.protobuf.TestMessages.TestEnum.TEST_DEFAULT.getNumber()) {
+      if (testEnum_ != TestMessages.TestEnum.TEST_DEFAULT.getNumber()) {
         output.writeEnum(2, testEnum_);
       }
       if (!getTestValueBytes().isEmpty()) {
@@ -2285,7 +2285,7 @@ public final class TestMessages {
       if (!getTestStringBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, testString_);
       }
-      if (testEnum_ != com.github.evis.shapeless.protobuf.TestMessages.TestEnum.TEST_DEFAULT.getNumber()) {
+      if (testEnum_ != TestMessages.TestEnum.TEST_DEFAULT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, testEnum_);
       }
@@ -2297,15 +2297,15 @@ public final class TestMessages {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue)) {
+      if (!(obj instanceof TestMessages.WithEnumAndValue)) {
         return super.equals(obj);
       }
-      com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue other = (com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue) obj;
+      TestMessages.WithEnumAndValue other = (TestMessages.WithEnumAndValue) obj;
 
       boolean result = true;
       result = result && getTestString()
@@ -2317,7 +2317,7 @@ public final class TestMessages {
       return result;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -2335,69 +2335,69 @@ public final class TestMessages {
       return hash;
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(
+    public static TestMessages.WithEnumAndValue parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(
+    public static TestMessages.WithEnumAndValue parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(
+    public static TestMessages.WithEnumAndValue parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(
+    public static TestMessages.WithEnumAndValue parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(byte[] data)
+    public static TestMessages.WithEnumAndValue parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(
+    public static TestMessages.WithEnumAndValue parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(java.io.InputStream input)
+    public static TestMessages.WithEnumAndValue parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(
+    public static TestMessages.WithEnumAndValue parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseDelimitedFrom(java.io.InputStream input)
+    public static TestMessages.WithEnumAndValue parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseDelimitedFrom(
+    public static TestMessages.WithEnumAndValue parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(
+    public static TestMessages.WithEnumAndValue parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parseFrom(
+    public static TestMessages.WithEnumAndValue parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2409,7 +2409,7 @@ public final class TestMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue prototype) {
+    public static Builder newBuilder(TestMessages.WithEnumAndValue prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -2417,9 +2417,9 @@ public final class TestMessages {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2429,26 +2429,26 @@ public final class TestMessages {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:WithEnumAndValue)
-        com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValueOrBuilder {
+        TestMessages.WithEnumAndValueOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnumAndValue_descriptor;
+        return TestMessages.internal_static_WithEnumAndValue_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnumAndValue_fieldAccessorTable
+        return TestMessages.internal_static_WithEnumAndValue_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue.class, com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue.Builder.class);
+                TestMessages.WithEnumAndValue.class, TestMessages.WithEnumAndValue.Builder.class);
       }
 
-      // Construct using com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue.newBuilder()
+      // Construct using TestMessages.WithEnumAndValue.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2470,23 +2470,23 @@ public final class TestMessages {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithEnumAndValue_descriptor;
+        return TestMessages.internal_static_WithEnumAndValue_descriptor;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue getDefaultInstanceForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue.getDefaultInstance();
+      public TestMessages.WithEnumAndValue getDefaultInstanceForType() {
+        return TestMessages.WithEnumAndValue.getDefaultInstance();
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue build() {
-        com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue result = buildPartial();
+      public TestMessages.WithEnumAndValue build() {
+        TestMessages.WithEnumAndValue result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue buildPartial() {
-        com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue result = new com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue(this);
+      public TestMessages.WithEnumAndValue buildPartial() {
+        TestMessages.WithEnumAndValue result = new TestMessages.WithEnumAndValue(this);
         result.testString_ = testString_;
         result.testEnum_ = testEnum_;
         result.testValue_ = testValue_;
@@ -2499,7 +2499,7 @@ public final class TestMessages {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2512,25 +2512,25 @@ public final class TestMessages {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue) {
-          return mergeFrom((com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue)other);
+        if (other instanceof TestMessages.WithEnumAndValue) {
+          return mergeFrom((TestMessages.WithEnumAndValue)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue other) {
-        if (other == com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue.getDefaultInstance()) return this;
+      public Builder mergeFrom(TestMessages.WithEnumAndValue other) {
+        if (other == TestMessages.WithEnumAndValue.getDefaultInstance()) return this;
         if (!other.getTestString().isEmpty()) {
           testString_ = other.testString_;
           onChanged();
@@ -2555,11 +2555,11 @@ public final class TestMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue parsedMessage = null;
+        TestMessages.WithEnumAndValue parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue) e.getUnfinishedMessage();
+          parsedMessage = (TestMessages.WithEnumAndValue) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -2569,20 +2569,20 @@ public final class TestMessages {
         return this;
       }
 
-      private java.lang.Object testString_ = "";
+      private Object testString_ = "";
       /**
        * <code>string test_string = 1;</code>
        */
-      public java.lang.String getTestString() {
-        java.lang.Object ref = testString_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestString() {
+        Object ref = testString_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testString_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -2590,11 +2590,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestStringBytes() {
-        java.lang.Object ref = testString_;
+        Object ref = testString_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testString_ = b;
           return b;
         } else {
@@ -2605,11 +2605,11 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder setTestString(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testString_ = value;
         onChanged();
         return this;
@@ -2618,7 +2618,7 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder clearTestString() {
-        
+
         testString_ = getDefaultInstance().getTestString();
         onChanged();
         return this;
@@ -2632,7 +2632,7 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testString_ = value;
         onChanged();
         return this;
@@ -2656,18 +2656,18 @@ public final class TestMessages {
       /**
        * <code>.TestEnum test_enum = 2;</code>
        */
-      public com.github.evis.shapeless.protobuf.TestMessages.TestEnum getTestEnum() {
-        com.github.evis.shapeless.protobuf.TestMessages.TestEnum result = com.github.evis.shapeless.protobuf.TestMessages.TestEnum.valueOf(testEnum_);
-        return result == null ? com.github.evis.shapeless.protobuf.TestMessages.TestEnum.UNRECOGNIZED : result;
+      public TestMessages.TestEnum getTestEnum() {
+        TestMessages.TestEnum result = TestMessages.TestEnum.valueOf(testEnum_);
+        return result == null ? TestMessages.TestEnum.UNRECOGNIZED : result;
       }
       /**
        * <code>.TestEnum test_enum = 2;</code>
        */
-      public Builder setTestEnum(com.github.evis.shapeless.protobuf.TestMessages.TestEnum value) {
+      public Builder setTestEnum(TestMessages.TestEnum value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        
+
         testEnum_ = value.getNumber();
         onChanged();
         return this;
@@ -2676,26 +2676,26 @@ public final class TestMessages {
        * <code>.TestEnum test_enum = 2;</code>
        */
       public Builder clearTestEnum() {
-        
+
         testEnum_ = 0;
         onChanged();
         return this;
       }
 
-      private java.lang.Object testValue_ = "";
+      private Object testValue_ = "";
       /**
        * <code>string test_value = 3;</code>
        */
-      public java.lang.String getTestValue() {
-        java.lang.Object ref = testValue_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestValue() {
+        Object ref = testValue_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testValue_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -2703,11 +2703,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestValueBytes() {
-        java.lang.Object ref = testValue_;
+        Object ref = testValue_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testValue_ = b;
           return b;
         } else {
@@ -2718,11 +2718,11 @@ public final class TestMessages {
        * <code>string test_value = 3;</code>
        */
       public Builder setTestValue(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testValue_ = value;
         onChanged();
         return this;
@@ -2731,7 +2731,7 @@ public final class TestMessages {
        * <code>string test_value = 3;</code>
        */
       public Builder clearTestValue() {
-        
+
         testValue_ = getDefaultInstance().getTestValue();
         onChanged();
         return this;
@@ -2745,7 +2745,7 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testValue_ = value;
         onChanged();
         return this;
@@ -2765,12 +2765,12 @@ public final class TestMessages {
     }
 
     // @@protoc_insertion_point(class_scope:WithEnumAndValue)
-    private static final com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue DEFAULT_INSTANCE;
+    private static final TestMessages.WithEnumAndValue DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue();
+      DEFAULT_INSTANCE = new TestMessages.WithEnumAndValue();
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue getDefaultInstance() {
+    public static TestMessages.WithEnumAndValue getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2788,12 +2788,12 @@ public final class TestMessages {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<WithEnumAndValue> getParserForType() {
       return PARSER;
     }
 
-    public com.github.evis.shapeless.protobuf.TestMessages.WithEnumAndValue getDefaultInstanceForType() {
+    public TestMessages.WithEnumAndValue getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2806,7 +2806,7 @@ public final class TestMessages {
     /**
      * <code>string test_string = 1;</code>
      */
-    java.lang.String getTestString();
+    String getTestString();
     /**
      * <code>string test_string = 1;</code>
      */
@@ -2816,7 +2816,7 @@ public final class TestMessages {
     /**
      * <code>string test_bytes_bytes = 2;</code>
      */
-    java.lang.String getTestBytesBytes();
+    String getTestBytesBytes();
     /**
      * <code>string test_bytes_bytes = 2;</code>
      */
@@ -2846,7 +2846,7 @@ public final class TestMessages {
       testBytes_ = com.google.protobuf.ByteString.EMPTY;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -2857,7 +2857,7 @@ public final class TestMessages {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
+        throw new NullPointerException();
       }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -2878,13 +2878,13 @@ public final class TestMessages {
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testString_ = s;
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testBytesBytes_ = s;
               break;
@@ -2908,29 +2908,29 @@ public final class TestMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytesAndBytes_descriptor;
+      return TestMessages.internal_static_WithBytesAndBytes_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytesAndBytes_fieldAccessorTable
+      return TestMessages.internal_static_WithBytesAndBytes_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes.class, com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes.Builder.class);
+              TestMessages.WithBytesAndBytes.class, TestMessages.WithBytesAndBytes.Builder.class);
     }
 
     public static final int TEST_STRING_FIELD_NUMBER = 1;
-    private volatile java.lang.Object testString_;
+    private volatile Object testString_;
     /**
      * <code>string test_string = 1;</code>
      */
-    public java.lang.String getTestString() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestString() {
+      Object ref = testString_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testString_ = s;
         return s;
       }
@@ -2940,11 +2940,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestStringBytes() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testString_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testString_ = b;
         return b;
       } else {
@@ -2953,18 +2953,18 @@ public final class TestMessages {
     }
 
     public static final int TEST_BYTES_BYTES_FIELD_NUMBER = 2;
-    private volatile java.lang.Object testBytesBytes_;
+    private volatile Object testBytesBytes_;
     /**
      * <code>string test_bytes_bytes = 2;</code>
      */
-    public java.lang.String getTestBytesBytes() {
-      java.lang.Object ref = testBytesBytes_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestBytesBytes() {
+      Object ref = testBytesBytes_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testBytesBytes_ = s;
         return s;
       }
@@ -2974,11 +2974,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestBytesBytesBytes() {
-      java.lang.Object ref = testBytesBytes_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testBytesBytes_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testBytesBytes_ = b;
         return b;
       } else {
@@ -3039,15 +3039,15 @@ public final class TestMessages {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes)) {
+      if (!(obj instanceof TestMessages.WithBytesAndBytes)) {
         return super.equals(obj);
       }
-      com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes other = (com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes) obj;
+      TestMessages.WithBytesAndBytes other = (TestMessages.WithBytesAndBytes) obj;
 
       boolean result = true;
       result = result && getTestString()
@@ -3060,7 +3060,7 @@ public final class TestMessages {
       return result;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -3078,69 +3078,69 @@ public final class TestMessages {
       return hash;
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(
+    public static TestMessages.WithBytesAndBytes parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(
+    public static TestMessages.WithBytesAndBytes parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(
+    public static TestMessages.WithBytesAndBytes parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(
+    public static TestMessages.WithBytesAndBytes parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(byte[] data)
+    public static TestMessages.WithBytesAndBytes parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(
+    public static TestMessages.WithBytesAndBytes parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(java.io.InputStream input)
+    public static TestMessages.WithBytesAndBytes parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(
+    public static TestMessages.WithBytesAndBytes parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseDelimitedFrom(java.io.InputStream input)
+    public static TestMessages.WithBytesAndBytes parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseDelimitedFrom(
+    public static TestMessages.WithBytesAndBytes parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(
+    public static TestMessages.WithBytesAndBytes parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parseFrom(
+    public static TestMessages.WithBytesAndBytes parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3152,7 +3152,7 @@ public final class TestMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes prototype) {
+    public static Builder newBuilder(TestMessages.WithBytesAndBytes prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -3160,9 +3160,9 @@ public final class TestMessages {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3172,26 +3172,26 @@ public final class TestMessages {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:WithBytesAndBytes)
-        com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytesOrBuilder {
+        TestMessages.WithBytesAndBytesOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytesAndBytes_descriptor;
+        return TestMessages.internal_static_WithBytesAndBytes_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytesAndBytes_fieldAccessorTable
+        return TestMessages.internal_static_WithBytesAndBytes_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes.class, com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes.Builder.class);
+                TestMessages.WithBytesAndBytes.class, TestMessages.WithBytesAndBytes.Builder.class);
       }
 
-      // Construct using com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes.newBuilder()
+      // Construct using TestMessages.WithBytesAndBytes.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3213,23 +3213,23 @@ public final class TestMessages {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_WithBytesAndBytes_descriptor;
+        return TestMessages.internal_static_WithBytesAndBytes_descriptor;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes getDefaultInstanceForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes.getDefaultInstance();
+      public TestMessages.WithBytesAndBytes getDefaultInstanceForType() {
+        return TestMessages.WithBytesAndBytes.getDefaultInstance();
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes build() {
-        com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes result = buildPartial();
+      public TestMessages.WithBytesAndBytes build() {
+        TestMessages.WithBytesAndBytes result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes buildPartial() {
-        com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes result = new com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes(this);
+      public TestMessages.WithBytesAndBytes buildPartial() {
+        TestMessages.WithBytesAndBytes result = new TestMessages.WithBytesAndBytes(this);
         result.testString_ = testString_;
         result.testBytesBytes_ = testBytesBytes_;
         result.testBytes_ = testBytes_;
@@ -3242,7 +3242,7 @@ public final class TestMessages {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3255,25 +3255,25 @@ public final class TestMessages {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes) {
-          return mergeFrom((com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes)other);
+        if (other instanceof TestMessages.WithBytesAndBytes) {
+          return mergeFrom((TestMessages.WithBytesAndBytes)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes other) {
-        if (other == com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes.getDefaultInstance()) return this;
+      public Builder mergeFrom(TestMessages.WithBytesAndBytes other) {
+        if (other == TestMessages.WithBytesAndBytes.getDefaultInstance()) return this;
         if (!other.getTestString().isEmpty()) {
           testString_ = other.testString_;
           onChanged();
@@ -3298,11 +3298,11 @@ public final class TestMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes parsedMessage = null;
+        TestMessages.WithBytesAndBytes parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes) e.getUnfinishedMessage();
+          parsedMessage = (TestMessages.WithBytesAndBytes) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -3312,20 +3312,20 @@ public final class TestMessages {
         return this;
       }
 
-      private java.lang.Object testString_ = "";
+      private Object testString_ = "";
       /**
        * <code>string test_string = 1;</code>
        */
-      public java.lang.String getTestString() {
-        java.lang.Object ref = testString_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestString() {
+        Object ref = testString_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testString_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -3333,11 +3333,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestStringBytes() {
-        java.lang.Object ref = testString_;
+        Object ref = testString_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testString_ = b;
           return b;
         } else {
@@ -3348,11 +3348,11 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder setTestString(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testString_ = value;
         onChanged();
         return this;
@@ -3361,7 +3361,7 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder clearTestString() {
-        
+
         testString_ = getDefaultInstance().getTestString();
         onChanged();
         return this;
@@ -3375,26 +3375,26 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testString_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object testBytesBytes_ = "";
+      private Object testBytesBytes_ = "";
       /**
        * <code>string test_bytes_bytes = 2;</code>
        */
-      public java.lang.String getTestBytesBytes() {
-        java.lang.Object ref = testBytesBytes_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestBytesBytes() {
+        Object ref = testBytesBytes_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testBytesBytes_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -3402,11 +3402,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestBytesBytesBytes() {
-        java.lang.Object ref = testBytesBytes_;
+        Object ref = testBytesBytes_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testBytesBytes_ = b;
           return b;
         } else {
@@ -3417,11 +3417,11 @@ public final class TestMessages {
        * <code>string test_bytes_bytes = 2;</code>
        */
       public Builder setTestBytesBytes(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testBytesBytes_ = value;
         onChanged();
         return this;
@@ -3430,7 +3430,7 @@ public final class TestMessages {
        * <code>string test_bytes_bytes = 2;</code>
        */
       public Builder clearTestBytesBytes() {
-        
+
         testBytesBytes_ = getDefaultInstance().getTestBytesBytes();
         onChanged();
         return this;
@@ -3444,7 +3444,7 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testBytesBytes_ = value;
         onChanged();
         return this;
@@ -3464,7 +3464,7 @@ public final class TestMessages {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testBytes_ = value;
         onChanged();
         return this;
@@ -3473,7 +3473,7 @@ public final class TestMessages {
        * <code>bytes test_bytes = 3;</code>
        */
       public Builder clearTestBytes() {
-        
+
         testBytes_ = getDefaultInstance().getTestBytes();
         onChanged();
         return this;
@@ -3493,12 +3493,12 @@ public final class TestMessages {
     }
 
     // @@protoc_insertion_point(class_scope:WithBytesAndBytes)
-    private static final com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes DEFAULT_INSTANCE;
+    private static final TestMessages.WithBytesAndBytes DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes();
+      DEFAULT_INSTANCE = new TestMessages.WithBytesAndBytes();
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes getDefaultInstance() {
+    public static TestMessages.WithBytesAndBytes getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3516,12 +3516,12 @@ public final class TestMessages {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<WithBytesAndBytes> getParserForType() {
       return PARSER;
     }
 
-    public com.github.evis.shapeless.protobuf.TestMessages.WithBytesAndBytes getDefaultInstanceForType() {
+    public TestMessages.WithBytesAndBytes getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3539,7 +3539,7 @@ public final class TestMessages {
     /**
      * <code>string test_inner_string = 2;</code>
      */
-    java.lang.String getTestInnerString();
+    String getTestInnerString();
     /**
      * <code>string test_inner_string = 2;</code>
      */
@@ -3563,7 +3563,7 @@ public final class TestMessages {
       testInnerString_ = "";
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -3574,7 +3574,7 @@ public final class TestMessages {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
+        throw new NullPointerException();
       }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -3600,7 +3600,7 @@ public final class TestMessages {
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testInnerString_ = s;
               break;
@@ -3619,14 +3619,14 @@ public final class TestMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Inner_descriptor;
+      return TestMessages.internal_static_Inner_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Inner_fieldAccessorTable
+      return TestMessages.internal_static_Inner_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.github.evis.shapeless.protobuf.TestMessages.Inner.class, com.github.evis.shapeless.protobuf.TestMessages.Inner.Builder.class);
+              TestMessages.Inner.class, TestMessages.Inner.Builder.class);
     }
 
     public static final int TEST_INNER_INT_FIELD_NUMBER = 1;
@@ -3639,18 +3639,18 @@ public final class TestMessages {
     }
 
     public static final int TEST_INNER_STRING_FIELD_NUMBER = 2;
-    private volatile java.lang.Object testInnerString_;
+    private volatile Object testInnerString_;
     /**
      * <code>string test_inner_string = 2;</code>
      */
-    public java.lang.String getTestInnerString() {
-      java.lang.Object ref = testInnerString_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestInnerString() {
+      Object ref = testInnerString_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testInnerString_ = s;
         return s;
       }
@@ -3660,11 +3660,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestInnerStringBytes() {
-      java.lang.Object ref = testInnerString_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testInnerString_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testInnerString_ = b;
         return b;
       } else {
@@ -3710,15 +3710,15 @@ public final class TestMessages {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.github.evis.shapeless.protobuf.TestMessages.Inner)) {
+      if (!(obj instanceof TestMessages.Inner)) {
         return super.equals(obj);
       }
-      com.github.evis.shapeless.protobuf.TestMessages.Inner other = (com.github.evis.shapeless.protobuf.TestMessages.Inner) obj;
+      TestMessages.Inner other = (TestMessages.Inner) obj;
 
       boolean result = true;
       result = result && (getTestInnerInt()
@@ -3729,7 +3729,7 @@ public final class TestMessages {
       return result;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -3745,69 +3745,69 @@ public final class TestMessages {
       return hash;
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(
+    public static TestMessages.Inner parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(
+    public static TestMessages.Inner parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(
+    public static TestMessages.Inner parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(
+    public static TestMessages.Inner parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(byte[] data)
+    public static TestMessages.Inner parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(
+    public static TestMessages.Inner parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(java.io.InputStream input)
+    public static TestMessages.Inner parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(
+    public static TestMessages.Inner parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseDelimitedFrom(java.io.InputStream input)
+    public static TestMessages.Inner parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseDelimitedFrom(
+    public static TestMessages.Inner parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(
+    public static TestMessages.Inner parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner parseFrom(
+    public static TestMessages.Inner parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3819,7 +3819,7 @@ public final class TestMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.github.evis.shapeless.protobuf.TestMessages.Inner prototype) {
+    public static Builder newBuilder(TestMessages.Inner prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -3827,9 +3827,9 @@ public final class TestMessages {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3839,26 +3839,26 @@ public final class TestMessages {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:Inner)
-        com.github.evis.shapeless.protobuf.TestMessages.InnerOrBuilder {
+        TestMessages.InnerOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Inner_descriptor;
+        return TestMessages.internal_static_Inner_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Inner_fieldAccessorTable
+        return TestMessages.internal_static_Inner_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.github.evis.shapeless.protobuf.TestMessages.Inner.class, com.github.evis.shapeless.protobuf.TestMessages.Inner.Builder.class);
+                TestMessages.Inner.class, TestMessages.Inner.Builder.class);
       }
 
-      // Construct using com.github.evis.shapeless.protobuf.TestMessages.Inner.newBuilder()
+      // Construct using TestMessages.Inner.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3878,23 +3878,23 @@ public final class TestMessages {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Inner_descriptor;
+        return TestMessages.internal_static_Inner_descriptor;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Inner getDefaultInstanceForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.Inner.getDefaultInstance();
+      public TestMessages.Inner getDefaultInstanceForType() {
+        return TestMessages.Inner.getDefaultInstance();
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Inner build() {
-        com.github.evis.shapeless.protobuf.TestMessages.Inner result = buildPartial();
+      public TestMessages.Inner build() {
+        TestMessages.Inner result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Inner buildPartial() {
-        com.github.evis.shapeless.protobuf.TestMessages.Inner result = new com.github.evis.shapeless.protobuf.TestMessages.Inner(this);
+      public TestMessages.Inner buildPartial() {
+        TestMessages.Inner result = new TestMessages.Inner(this);
         result.testInnerInt_ = testInnerInt_;
         result.testInnerString_ = testInnerString_;
         onBuilt();
@@ -3906,7 +3906,7 @@ public final class TestMessages {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3919,25 +3919,25 @@ public final class TestMessages {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.github.evis.shapeless.protobuf.TestMessages.Inner) {
-          return mergeFrom((com.github.evis.shapeless.protobuf.TestMessages.Inner)other);
+        if (other instanceof TestMessages.Inner) {
+          return mergeFrom((TestMessages.Inner)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.github.evis.shapeless.protobuf.TestMessages.Inner other) {
-        if (other == com.github.evis.shapeless.protobuf.TestMessages.Inner.getDefaultInstance()) return this;
+      public Builder mergeFrom(TestMessages.Inner other) {
+        if (other == TestMessages.Inner.getDefaultInstance()) return this;
         if (other.getTestInnerInt() != 0) {
           setTestInnerInt(other.getTestInnerInt());
         }
@@ -3958,11 +3958,11 @@ public final class TestMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.evis.shapeless.protobuf.TestMessages.Inner parsedMessage = null;
+        TestMessages.Inner parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.evis.shapeless.protobuf.TestMessages.Inner) e.getUnfinishedMessage();
+          parsedMessage = (TestMessages.Inner) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -3983,7 +3983,7 @@ public final class TestMessages {
        * <code>int32 test_inner_int = 1;</code>
        */
       public Builder setTestInnerInt(int value) {
-        
+
         testInnerInt_ = value;
         onChanged();
         return this;
@@ -3992,26 +3992,26 @@ public final class TestMessages {
        * <code>int32 test_inner_int = 1;</code>
        */
       public Builder clearTestInnerInt() {
-        
+
         testInnerInt_ = 0;
         onChanged();
         return this;
       }
 
-      private java.lang.Object testInnerString_ = "";
+      private Object testInnerString_ = "";
       /**
        * <code>string test_inner_string = 2;</code>
        */
-      public java.lang.String getTestInnerString() {
-        java.lang.Object ref = testInnerString_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestInnerString() {
+        Object ref = testInnerString_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testInnerString_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -4019,11 +4019,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestInnerStringBytes() {
-        java.lang.Object ref = testInnerString_;
+        Object ref = testInnerString_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testInnerString_ = b;
           return b;
         } else {
@@ -4034,11 +4034,11 @@ public final class TestMessages {
        * <code>string test_inner_string = 2;</code>
        */
       public Builder setTestInnerString(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testInnerString_ = value;
         onChanged();
         return this;
@@ -4047,7 +4047,7 @@ public final class TestMessages {
        * <code>string test_inner_string = 2;</code>
        */
       public Builder clearTestInnerString() {
-        
+
         testInnerString_ = getDefaultInstance().getTestInnerString();
         onChanged();
         return this;
@@ -4061,7 +4061,7 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testInnerString_ = value;
         onChanged();
         return this;
@@ -4081,12 +4081,12 @@ public final class TestMessages {
     }
 
     // @@protoc_insertion_point(class_scope:Inner)
-    private static final com.github.evis.shapeless.protobuf.TestMessages.Inner DEFAULT_INSTANCE;
+    private static final TestMessages.Inner DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.github.evis.shapeless.protobuf.TestMessages.Inner();
+      DEFAULT_INSTANCE = new TestMessages.Inner();
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.Inner getDefaultInstance() {
+    public static TestMessages.Inner getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4104,12 +4104,12 @@ public final class TestMessages {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<Inner> getParserForType() {
       return PARSER;
     }
 
-    public com.github.evis.shapeless.protobuf.TestMessages.Inner getDefaultInstanceForType() {
+    public TestMessages.Inner getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4122,7 +4122,7 @@ public final class TestMessages {
     /**
      * <code>string test_string = 1;</code>
      */
-    java.lang.String getTestString();
+    String getTestString();
     /**
      * <code>string test_string = 1;</code>
      */
@@ -4136,11 +4136,11 @@ public final class TestMessages {
     /**
      * <code>.Inner test_inner = 2;</code>
      */
-    com.github.evis.shapeless.protobuf.TestMessages.Inner getTestInner();
+    TestMessages.Inner getTestInner();
     /**
      * <code>.Inner test_inner = 2;</code>
      */
-    com.github.evis.shapeless.protobuf.TestMessages.InnerOrBuilder getTestInnerOrBuilder();
+    TestMessages.InnerOrBuilder getTestInnerOrBuilder();
 
     /**
      * <code>int32 test_inner_int = 3;</code>
@@ -4164,7 +4164,7 @@ public final class TestMessages {
       testInnerInt_ = 0;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -4175,7 +4175,7 @@ public final class TestMessages {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
+        throw new NullPointerException();
       }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -4196,17 +4196,17 @@ public final class TestMessages {
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              String s = input.readStringRequireUtf8();
 
               testString_ = s;
               break;
             }
             case 18: {
-              com.github.evis.shapeless.protobuf.TestMessages.Inner.Builder subBuilder = null;
+              TestMessages.Inner.Builder subBuilder = null;
               if (testInner_ != null) {
                 subBuilder = testInner_.toBuilder();
               }
-              testInner_ = input.readMessage(com.github.evis.shapeless.protobuf.TestMessages.Inner.parser(), extensionRegistry);
+              testInner_ = input.readMessage(TestMessages.Inner.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(testInner_);
                 testInner_ = subBuilder.buildPartial();
@@ -4233,29 +4233,29 @@ public final class TestMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Nested_descriptor;
+      return TestMessages.internal_static_Nested_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Nested_fieldAccessorTable
+      return TestMessages.internal_static_Nested_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.github.evis.shapeless.protobuf.TestMessages.Nested.class, com.github.evis.shapeless.protobuf.TestMessages.Nested.Builder.class);
+              TestMessages.Nested.class, TestMessages.Nested.Builder.class);
     }
 
     public static final int TEST_STRING_FIELD_NUMBER = 1;
-    private volatile java.lang.Object testString_;
+    private volatile Object testString_;
     /**
      * <code>string test_string = 1;</code>
      */
-    public java.lang.String getTestString() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTestString() {
+      Object ref = testString_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         testString_ = s;
         return s;
       }
@@ -4265,11 +4265,11 @@ public final class TestMessages {
      */
     public com.google.protobuf.ByteString
         getTestStringBytes() {
-      java.lang.Object ref = testString_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = testString_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         testString_ = b;
         return b;
       } else {
@@ -4278,7 +4278,7 @@ public final class TestMessages {
     }
 
     public static final int TEST_INNER_FIELD_NUMBER = 2;
-    private com.github.evis.shapeless.protobuf.TestMessages.Inner testInner_;
+    private TestMessages.Inner testInner_;
     /**
      * <code>.Inner test_inner = 2;</code>
      */
@@ -4288,13 +4288,13 @@ public final class TestMessages {
     /**
      * <code>.Inner test_inner = 2;</code>
      */
-    public com.github.evis.shapeless.protobuf.TestMessages.Inner getTestInner() {
-      return testInner_ == null ? com.github.evis.shapeless.protobuf.TestMessages.Inner.getDefaultInstance() : testInner_;
+    public TestMessages.Inner getTestInner() {
+      return testInner_ == null ? TestMessages.Inner.getDefaultInstance() : testInner_;
     }
     /**
      * <code>.Inner test_inner = 2;</code>
      */
-    public com.github.evis.shapeless.protobuf.TestMessages.InnerOrBuilder getTestInnerOrBuilder() {
+    public TestMessages.InnerOrBuilder getTestInnerOrBuilder() {
       return getTestInner();
     }
 
@@ -4352,15 +4352,15 @@ public final class TestMessages {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.github.evis.shapeless.protobuf.TestMessages.Nested)) {
+      if (!(obj instanceof TestMessages.Nested)) {
         return super.equals(obj);
       }
-      com.github.evis.shapeless.protobuf.TestMessages.Nested other = (com.github.evis.shapeless.protobuf.TestMessages.Nested) obj;
+      TestMessages.Nested other = (TestMessages.Nested) obj;
 
       boolean result = true;
       result = result && getTestString()
@@ -4376,7 +4376,7 @@ public final class TestMessages {
       return result;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -4396,69 +4396,69 @@ public final class TestMessages {
       return hash;
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(
+    public static TestMessages.Nested parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(
+    public static TestMessages.Nested parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(
+    public static TestMessages.Nested parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(
+    public static TestMessages.Nested parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(byte[] data)
+    public static TestMessages.Nested parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(
+    public static TestMessages.Nested parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(java.io.InputStream input)
+    public static TestMessages.Nested parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(
+    public static TestMessages.Nested parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseDelimitedFrom(java.io.InputStream input)
+    public static TestMessages.Nested parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseDelimitedFrom(
+    public static TestMessages.Nested parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(
+    public static TestMessages.Nested parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested parseFrom(
+    public static TestMessages.Nested parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4470,7 +4470,7 @@ public final class TestMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.github.evis.shapeless.protobuf.TestMessages.Nested prototype) {
+    public static Builder newBuilder(TestMessages.Nested prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -4478,9 +4478,9 @@ public final class TestMessages {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4490,26 +4490,26 @@ public final class TestMessages {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:Nested)
-        com.github.evis.shapeless.protobuf.TestMessages.NestedOrBuilder {
+        TestMessages.NestedOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Nested_descriptor;
+        return TestMessages.internal_static_Nested_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Nested_fieldAccessorTable
+        return TestMessages.internal_static_Nested_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.github.evis.shapeless.protobuf.TestMessages.Nested.class, com.github.evis.shapeless.protobuf.TestMessages.Nested.Builder.class);
+                TestMessages.Nested.class, TestMessages.Nested.Builder.class);
       }
 
-      // Construct using com.github.evis.shapeless.protobuf.TestMessages.Nested.newBuilder()
+      // Construct using TestMessages.Nested.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -4535,23 +4535,23 @@ public final class TestMessages {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.internal_static_Nested_descriptor;
+        return TestMessages.internal_static_Nested_descriptor;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Nested getDefaultInstanceForType() {
-        return com.github.evis.shapeless.protobuf.TestMessages.Nested.getDefaultInstance();
+      public TestMessages.Nested getDefaultInstanceForType() {
+        return TestMessages.Nested.getDefaultInstance();
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Nested build() {
-        com.github.evis.shapeless.protobuf.TestMessages.Nested result = buildPartial();
+      public TestMessages.Nested build() {
+        TestMessages.Nested result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.github.evis.shapeless.protobuf.TestMessages.Nested buildPartial() {
-        com.github.evis.shapeless.protobuf.TestMessages.Nested result = new com.github.evis.shapeless.protobuf.TestMessages.Nested(this);
+      public TestMessages.Nested buildPartial() {
+        TestMessages.Nested result = new TestMessages.Nested(this);
         result.testString_ = testString_;
         if (testInnerBuilder_ == null) {
           result.testInner_ = testInner_;
@@ -4568,7 +4568,7 @@ public final class TestMessages {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4581,25 +4581,25 @@ public final class TestMessages {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.github.evis.shapeless.protobuf.TestMessages.Nested) {
-          return mergeFrom((com.github.evis.shapeless.protobuf.TestMessages.Nested)other);
+        if (other instanceof TestMessages.Nested) {
+          return mergeFrom((TestMessages.Nested)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.github.evis.shapeless.protobuf.TestMessages.Nested other) {
-        if (other == com.github.evis.shapeless.protobuf.TestMessages.Nested.getDefaultInstance()) return this;
+      public Builder mergeFrom(TestMessages.Nested other) {
+        if (other == TestMessages.Nested.getDefaultInstance()) return this;
         if (!other.getTestString().isEmpty()) {
           testString_ = other.testString_;
           onChanged();
@@ -4623,11 +4623,11 @@ public final class TestMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.evis.shapeless.protobuf.TestMessages.Nested parsedMessage = null;
+        TestMessages.Nested parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.evis.shapeless.protobuf.TestMessages.Nested) e.getUnfinishedMessage();
+          parsedMessage = (TestMessages.Nested) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -4637,20 +4637,20 @@ public final class TestMessages {
         return this;
       }
 
-      private java.lang.Object testString_ = "";
+      private Object testString_ = "";
       /**
        * <code>string test_string = 1;</code>
        */
-      public java.lang.String getTestString() {
-        java.lang.Object ref = testString_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTestString() {
+        Object ref = testString_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           testString_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -4658,11 +4658,11 @@ public final class TestMessages {
        */
       public com.google.protobuf.ByteString
           getTestStringBytes() {
-        java.lang.Object ref = testString_;
+        Object ref = testString_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           testString_ = b;
           return b;
         } else {
@@ -4673,11 +4673,11 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder setTestString(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         testString_ = value;
         onChanged();
         return this;
@@ -4686,7 +4686,7 @@ public final class TestMessages {
        * <code>string test_string = 1;</code>
        */
       public Builder clearTestString() {
-        
+
         testString_ = getDefaultInstance().getTestString();
         onChanged();
         return this;
@@ -4700,15 +4700,15 @@ public final class TestMessages {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
+
         testString_ = value;
         onChanged();
         return this;
       }
 
-      private com.github.evis.shapeless.protobuf.TestMessages.Inner testInner_ = null;
+      private TestMessages.Inner testInner_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.github.evis.shapeless.protobuf.TestMessages.Inner, com.github.evis.shapeless.protobuf.TestMessages.Inner.Builder, com.github.evis.shapeless.protobuf.TestMessages.InnerOrBuilder> testInnerBuilder_;
+          Inner, Inner.Builder, InnerOrBuilder> testInnerBuilder_;
       /**
        * <code>.Inner test_inner = 2;</code>
        */
@@ -4718,9 +4718,9 @@ public final class TestMessages {
       /**
        * <code>.Inner test_inner = 2;</code>
        */
-      public com.github.evis.shapeless.protobuf.TestMessages.Inner getTestInner() {
+      public TestMessages.Inner getTestInner() {
         if (testInnerBuilder_ == null) {
-          return testInner_ == null ? com.github.evis.shapeless.protobuf.TestMessages.Inner.getDefaultInstance() : testInner_;
+          return testInner_ == null ? TestMessages.Inner.getDefaultInstance() : testInner_;
         } else {
           return testInnerBuilder_.getMessage();
         }
@@ -4728,7 +4728,7 @@ public final class TestMessages {
       /**
        * <code>.Inner test_inner = 2;</code>
        */
-      public Builder setTestInner(com.github.evis.shapeless.protobuf.TestMessages.Inner value) {
+      public Builder setTestInner(TestMessages.Inner value) {
         if (testInnerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4745,7 +4745,7 @@ public final class TestMessages {
        * <code>.Inner test_inner = 2;</code>
        */
       public Builder setTestInner(
-          com.github.evis.shapeless.protobuf.TestMessages.Inner.Builder builderForValue) {
+          TestMessages.Inner.Builder builderForValue) {
         if (testInnerBuilder_ == null) {
           testInner_ = builderForValue.build();
           onChanged();
@@ -4758,11 +4758,11 @@ public final class TestMessages {
       /**
        * <code>.Inner test_inner = 2;</code>
        */
-      public Builder mergeTestInner(com.github.evis.shapeless.protobuf.TestMessages.Inner value) {
+      public Builder mergeTestInner(TestMessages.Inner value) {
         if (testInnerBuilder_ == null) {
           if (testInner_ != null) {
             testInner_ =
-              com.github.evis.shapeless.protobuf.TestMessages.Inner.newBuilder(testInner_).mergeFrom(value).buildPartial();
+              TestMessages.Inner.newBuilder(testInner_).mergeFrom(value).buildPartial();
           } else {
             testInner_ = value;
           }
@@ -4790,31 +4790,31 @@ public final class TestMessages {
       /**
        * <code>.Inner test_inner = 2;</code>
        */
-      public com.github.evis.shapeless.protobuf.TestMessages.Inner.Builder getTestInnerBuilder() {
-        
+      public TestMessages.Inner.Builder getTestInnerBuilder() {
+
         onChanged();
         return getTestInnerFieldBuilder().getBuilder();
       }
       /**
        * <code>.Inner test_inner = 2;</code>
        */
-      public com.github.evis.shapeless.protobuf.TestMessages.InnerOrBuilder getTestInnerOrBuilder() {
+      public TestMessages.InnerOrBuilder getTestInnerOrBuilder() {
         if (testInnerBuilder_ != null) {
           return testInnerBuilder_.getMessageOrBuilder();
         } else {
           return testInner_ == null ?
-              com.github.evis.shapeless.protobuf.TestMessages.Inner.getDefaultInstance() : testInner_;
+              TestMessages.Inner.getDefaultInstance() : testInner_;
         }
       }
       /**
        * <code>.Inner test_inner = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.github.evis.shapeless.protobuf.TestMessages.Inner, com.github.evis.shapeless.protobuf.TestMessages.Inner.Builder, com.github.evis.shapeless.protobuf.TestMessages.InnerOrBuilder> 
+          Inner, Inner.Builder, InnerOrBuilder>
           getTestInnerFieldBuilder() {
         if (testInnerBuilder_ == null) {
           testInnerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.github.evis.shapeless.protobuf.TestMessages.Inner, com.github.evis.shapeless.protobuf.TestMessages.Inner.Builder, com.github.evis.shapeless.protobuf.TestMessages.InnerOrBuilder>(
+              Inner, Inner.Builder, InnerOrBuilder>(
                   getTestInner(),
                   getParentForChildren(),
                   isClean());
@@ -4834,7 +4834,7 @@ public final class TestMessages {
        * <code>int32 test_inner_int = 3;</code>
        */
       public Builder setTestInnerInt(int value) {
-        
+
         testInnerInt_ = value;
         onChanged();
         return this;
@@ -4843,7 +4843,7 @@ public final class TestMessages {
        * <code>int32 test_inner_int = 3;</code>
        */
       public Builder clearTestInnerInt() {
-        
+
         testInnerInt_ = 0;
         onChanged();
         return this;
@@ -4863,12 +4863,12 @@ public final class TestMessages {
     }
 
     // @@protoc_insertion_point(class_scope:Nested)
-    private static final com.github.evis.shapeless.protobuf.TestMessages.Nested DEFAULT_INSTANCE;
+    private static final TestMessages.Nested DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.github.evis.shapeless.protobuf.TestMessages.Nested();
+      DEFAULT_INSTANCE = new TestMessages.Nested();
     }
 
-    public static com.github.evis.shapeless.protobuf.TestMessages.Nested getDefaultInstance() {
+    public static TestMessages.Nested getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4886,12 +4886,12 @@ public final class TestMessages {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<Nested> getParserForType() {
       return PARSER;
     }
 
-    public com.github.evis.shapeless.protobuf.TestMessages.Nested getDefaultInstanceForType() {
+    public TestMessages.Nested getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4899,37 +4899,37 @@ public final class TestMessages {
 
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Primitives_descriptor;
-  private static final 
+  private static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Primitives_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_WithEnum_descriptor;
-  private static final 
+  private static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_WithEnum_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_WithBytes_descriptor;
-  private static final 
+  private static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_WithBytes_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_WithEnumAndValue_descriptor;
-  private static final 
+  private static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_WithEnumAndValue_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_WithBytesAndBytes_descriptor;
-  private static final 
+  private static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_WithBytesAndBytes_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Inner_descriptor;
-  private static final 
+  private static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Inner_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Nested_descriptor;
-  private static final 
+  private static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Nested_fieldAccessorTable;
 
@@ -4940,7 +4940,7 @@ public final class TestMessages {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    java.lang.String[] descriptorData = {
+    String[] descriptorData = {
       "\n\023test_messages.proto\"Y\n\nPrimitives\022\023\n\013t" +
       "est_string\030\001 \001(\t\022\020\n\010test_int\030\002 \001(\005\022\021\n\tte" +
       "st_long\030\003 \001(\003\022\021\n\ttest_bool\030\004 \001(\010\"=\n\010With" +
@@ -4976,43 +4976,43 @@ public final class TestMessages {
     internal_static_Primitives_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Primitives_descriptor,
-        new java.lang.String[] { "TestString", "TestInt", "TestLong", "TestBool", });
+        new String[] { "TestString", "TestInt", "TestLong", "TestBool", });
     internal_static_WithEnum_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_WithEnum_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_WithEnum_descriptor,
-        new java.lang.String[] { "TestString", "TestEnum", });
+        new String[] { "TestString", "TestEnum", });
     internal_static_WithBytes_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_WithBytes_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_WithBytes_descriptor,
-        new java.lang.String[] { "TestString", "TestBytes", });
+        new String[] { "TestString", "TestBytes", });
     internal_static_WithEnumAndValue_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_WithEnumAndValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_WithEnumAndValue_descriptor,
-        new java.lang.String[] { "TestString", "TestEnum", "TestValue", });
+        new String[] { "TestString", "TestEnum", "TestValue", });
     internal_static_WithBytesAndBytes_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_WithBytesAndBytes_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_WithBytesAndBytes_descriptor,
-        new java.lang.String[] { "TestString", "TestBytesBytes", "TestBytes", });
+        new String[] { "TestString", "TestBytesBytes", "TestBytes", });
     internal_static_Inner_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_Inner_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Inner_descriptor,
-        new java.lang.String[] { "TestInnerInt", "TestInnerString", });
+        new String[] { "TestInnerInt", "TestInnerString", });
     internal_static_Nested_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_Nested_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Nested_descriptor,
-        new java.lang.String[] { "TestString", "TestInner", "TestInnerInt", });
+        new String[] { "TestString", "TestInner", "TestInnerInt", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
