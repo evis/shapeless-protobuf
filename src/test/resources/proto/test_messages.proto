@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option java_package = "com.github.evis.shapeless.protobuf";
+
+message Primitives {
+    string test_string = 1;
+    int32 test_int = 2;
+    int64 test_long = 3;
+    bool test_bool = 4;
+}
+
+enum TestEnum {
+    TEST_DEFAULT = 0;
+    TEST_VALUE = 1;
+    TEST_ANOTHER_VALUE = 2;
+}
+
+message WithEnum {
+    string test_string = 1;
+    TestEnum test_enum = 2;
+}
+
+message WithBytes {
+    string test_string = 1;
+    bytes test_bytes = 2;
+}
+
+message WithEnumAndValue {
+    string test_string = 1;
+    TestEnum test_enum = 2;
+    string test_value = 3;
+}
+
+message WithBytesAndBytes {
+    string test_string = 1;
+    string test_bytes_bytes = 2;
+    bytes test_bytes = 3;
+}
+
+message Inner {
+    int32 test_inner_int = 1;
+    string test_inner_string = 2;
+}
+
+message Nested {
+    string test_string = 1;
+    Inner test_inner = 2;
+    int32 test_inner_int = 3;
+}
