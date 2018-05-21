@@ -6,5 +6,5 @@ import scala.language.experimental.macros
 
 package object protobuf {
 
-  implicit def protobufProduct[T, R]: Generic.Aux[T, R] = macro ShapelessProtobufMacros.protobufProduct[T, R]
+  implicit def protobufGeneric[T, R]: Generic.Aux[T, R] = macro ShapelessProtobufMacros.protobufGeneric[T, R]
 }

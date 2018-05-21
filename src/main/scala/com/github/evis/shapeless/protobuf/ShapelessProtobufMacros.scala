@@ -7,7 +7,7 @@ import scala.reflect.macros.whitebox
 private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   import c.universe._
 
-  def protobufProduct[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
+  def protobufGeneric[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
     val to = mkHListValue(tpe, fieldsOf(tpe), q"p")
