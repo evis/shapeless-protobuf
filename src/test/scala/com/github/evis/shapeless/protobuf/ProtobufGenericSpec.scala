@@ -131,11 +131,7 @@ object ProtobufGenericSpec extends Properties("ProtobufGeneric") {
         case s :: (ii :: is :: HNil) :: i :: HNil =>
           repr.to[Nested] == {
             val b = Nested.newBuilder()
-            b.setTestString(s)
-              .setTestInnerInt(i)
-              .getTestInnerBuilder
-              .setTestInnerInt(ii)
-              .setTestInnerString(is)
+            b.setTestString(s).setTestInnerInt(i).getTestInnerBuilder.setTestInnerInt(ii).setTestInnerString(is)
             b.build()
           }
       }
