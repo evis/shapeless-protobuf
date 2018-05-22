@@ -1,6 +1,7 @@
 package com.github.evis.shapeless.protobuf
 
 import com.github.evis.shapeless.protobuf.TestMessages._
+import com.google.protobuf.ByteString
 import org.scalacheck.Prop.{BooleanOperators, forAll}
 import org.scalacheck.Properties
 import org.scalacheck.ScalacheckShapeless._
@@ -40,7 +41,7 @@ object ProtobufGenericSpec extends Properties("ProtobufGeneric") {
       // TODO filter unrecognized automatically for protobuf enums
       e != TestEnum.UNRECOGNIZED ==> {
         val p = WithEnum.newBuilder().setTestString(s).setTestEnum(e).build()
-        p.toHList == p.getTestString :: p.getTestEnum :: HNil
+        p.toHList == s :: e :: HNil
       }
     }
   }
@@ -53,6 +54,25 @@ object ProtobufGenericSpec extends Properties("ProtobufGeneric") {
         val p = repr.to[WithEnum]
         p == WithEnum.newBuilder().setTestString(s).setTestEnum(e).build()
       }
+    }
+  }
+
+  property("convert with bytes to generic") = {
+    // TODO arbitrary for ByteString
+    forAll { (s: String, b: Array[Byte]) =>
+      val bs = ByteString.copyFrom(b)
+      val p = WithBytes.newBuilder().setTestString(s).setTestBytes(bs).build()
+      p.toHList == s :: bs :: HNil
+    }
+  }
+
+  property("convert generic to with bytes") = {
+    // TODO arbitrary for ByteString
+    forAll { (s: String, b: Array[Byte]) =>
+      val bs = ByteString.copyFrom(b)
+      val repr = s :: bs :: HNil
+      val p = repr.to[WithBytes]
+      p == WithBytes.newBuilder().setTestString(s).setTestBytes(bs).build()
     }
   }
 }
