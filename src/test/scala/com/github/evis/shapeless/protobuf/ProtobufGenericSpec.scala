@@ -75,4 +75,70 @@ object ProtobufGenericSpec extends Properties("ProtobufGeneric") {
       p == WithBytes.newBuilder().setTestString(s).setTestBytes(bs).build()
     }
   }
+
+  // shouldn't ignore String method named getXXXValue, if there is no enum method named getXXX
+  // protobuf-java generates such getXXXValue for enums
+  property("convert with enum and value to generic") = {
+    forAll { (s: String, e: TestEnum, v: String) =>
+      // TODO filter unrecognized automatically for protobuf enums
+      e != TestEnum.UNRECOGNIZED ==> {
+        val p = WithEnumAndValue.newBuilder().setTestString(s).setTestEnum(e).setTestValue(v).build()
+        p.toHList == s :: e :: v :: HNil
+      }
+    }
+  }
+
+  property("convert generic to with enum and value") = {
+    forAll { (s: String, e: TestEnum, v: String) =>
+      // TODO filter unrecognized automatically for protobuf enums
+      e != TestEnum.UNRECOGNIZED ==> {
+        val repr = s :: e :: v :: HNil
+        val p = repr.to[WithEnumAndValue]
+        p == WithEnumAndValue.newBuilder().setTestString(s).setTestEnum(e).setTestValue(v).build()
+      }
+    }
+  }
+
+  // shouldn't ignore ByteString methods named getXXXBytes, if there is no String method named getXXX
+  // protobuf-java generates such getXXXBytes for strings
+  property("convert with bytes and bytes to generic") = {
+    forAll { (s: String, sbb: String, b: Array[Byte]) =>
+      val bs = ByteString.copyFrom(b)
+      val repr = s :: sbb :: bs :: HNil
+      val p = repr.to[WithBytesAndBytes]
+      p == WithBytesAndBytes.newBuilder().setTestString(s).setTestBytesBytes(sbb).setTestBytes(bs).build()
+    }
+  }
+
+  property("convert generic to with bytes and bytes") = {
+    forAll { (s: String, sbb: String, b: Array[Byte]) =>
+      val bs = ByteString.copyFrom(b)
+      val p = WithBytesAndBytes.newBuilder().setTestString(s).setTestBytesBytes(sbb).setTestBytes(bs).build()
+      p.toHList == s :: sbb :: bs :: HNil
+    }
+  }
+
+  property("convert nested to generic") = {
+    forAll { p: Nested =>
+      val i = p.getTestInner
+      p.toHList == p.getTestString :: (i.getTestInnerInt :: i.getTestInnerString :: HNil) :: p.getTestInnerInt :: HNil
+    }
+  }
+
+  property("convert generic to nested") = {
+    forAll { repr: (String :: (Int :: String :: HNil) :: Int :: HNil) =>
+      repr match {
+        case s :: (ii :: is :: HNil) :: i :: HNil =>
+          repr.to[Nested] == {
+            val b = Nested.newBuilder()
+            b.setTestString(s)
+              .setTestInnerInt(i)
+              .getTestInnerBuilder
+              .setTestInnerInt(ii)
+              .setTestInnerString(is)
+            b.build()
+          }
+      }
+    }
+  }
 }
