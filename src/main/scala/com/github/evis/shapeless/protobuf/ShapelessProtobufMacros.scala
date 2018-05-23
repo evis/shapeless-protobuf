@@ -3,6 +3,7 @@ package com.github.evis.shapeless.protobuf
 import shapeless.{::, HNil}
 
 import scala.reflect.macros.whitebox
+import scala.sys.error
 
 private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   import c.universe._
@@ -69,13 +70,12 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     }
   }
 
+  /** Returns list of protobuf field getters for $tpe. */
   def fieldsOf(tpe: Type): List[TermSymbol] = {
-    val allSyms = tpe.baseClasses.find {
-      _.fullName match {
-        case "com.google.protobuf.MessageOrBuilder" => false
-        case name => name.endsWith("OrBuilder")
-      }
-    }.getOrElse(sys.error(s"$tpe isn't protobuf type: ${tpe}OrBuilder type not found"))
+    // protobuf fields info without lots of trash are contained in XXXOrBuilder interface
+    // we filter methods like getDefaultInstanceForType(), getParserForType(), etc. from tpe class this way
+    val allSyms = tpe.baseClasses.find(_.fullName == tpe.typeSymbol + "OrBuilder")
+      .getOrElse(error(s"$tpe isn't protobuf type: ${tpe}OrBuilder type not found"))
       .asType.toType.decls.sorted.collect { case sym: TermSymbol => sym }
     // TODO refactor it
     allSyms.filterNot { sym =>
