@@ -36,8 +36,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def mkHListValue(tpe: Type, fields: List[TermSymbol], prefix: Tree): Tree = {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
       val fieldType = field.typeSignature.finalResultType
-      val isMsg = fieldType.baseClasses.contains(tq"com.google.protobuf.Message")
-      if (isMsg) {
+      if (isMsg(fieldType)) {
         q"_root_.shapeless.::(${mkHListValue(fieldType, fieldsOf(fieldType), q"$prefix.$field")}, $acc)"
       } else {
         q"_root_.shapeless.::($prefix.$field, $acc)"
@@ -50,10 +49,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
       case (field, (patternAcc, builderAcc)) =>
         val setter = TermName(field.name.toString.replaceFirst("get", "set"))
         val fieldType = field.typeSignature.resultType
-        val isMsg = fieldType.baseClasses.exists {
-          _.fullName.toString == "com.google.protobuf.Message"
-        }
-        if (isMsg) {
+        if (isMsg(fieldType)) {
           val (msgPattern, msgBuilder) = mkFrom(fieldType)
           val pattern = pq"_root_.shapeless.::(($msgPattern), $patternAcc)"
           val builder = q"$builderAcc.$setter($msgBuilder)"
@@ -109,6 +105,10 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
 
   def fieldsResultTypesOf(tpe: Type): List[Type] =
     fieldsOf(tpe).map(_.typeSignature.finalResultType)
+
+  /** Returns true, if tpe is protobuf message; false otherwise. */
+  def isMsg(tpe: Type): Boolean =
+    tpe.baseClasses.contains(tq"com.google.protobuf.Message")
 
   def mkAttributedRef(tpe: Type): Tree = {
     // TODO review this! just copy-pasted from shapeless
