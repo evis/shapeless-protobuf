@@ -50,8 +50,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def mkFrom(tpe: Type): (Tree, Tree) = {
     fieldsOf(tpe).foldRight((q"_root_.shapeless.HNil": Tree, q"${tpe.companion}.newBuilder()": Tree)) {
       case (field, (patternAcc, builderAcc)) =>
-        val setterName = field.name.toString.replaceFirst("get", "set")
-        val setter = TermName(setterName)
+        val setter: TermName = field.name.toString.replaceFirst("get", "set")
         val fieldType = field.typeSignature.resultType
         val isMsg = fieldType.baseClasses.exists {
           _.fullName.toString == "com.google.protobuf.Message"
