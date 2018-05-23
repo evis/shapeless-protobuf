@@ -35,7 +35,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
 
   def mkHListValue(tpe: Type, fields: List[TermSymbol], prefix: Tree): Tree = {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
-      val fieldType = field.typeSignatureIn(tpe).finalResultType
+      val fieldType = field.typeSignature.finalResultType
       val isMsg = fieldType.baseClasses.exists {
         _.fullName.toString == "com.google.protobuf.Message"
       }
@@ -52,7 +52,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
       case (field, (patternAcc, builderAcc)) =>
         val setterName = field.name.toString.replaceFirst("get", "set")
         val setter = TermName(setterName)
-        val fieldType = field.typeSignatureIn(tpe).resultType
+        val fieldType = field.typeSignature.resultType
         val isMsg = fieldType.baseClasses.exists {
           _.fullName.toString == "com.google.protobuf.Message"
         }
@@ -80,19 +80,19 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     // TODO refactor it
     allSyms.filterNot { sym =>
       val symName = sym.name.toString
-      sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName match {
+      sym.typeSignature.finalResultType.typeSymbol.fullName match {
         case "com.google.protobuf.ByteString" =>
           // ignore ByteString methods with Bytes suffix, generated for strings
           symName.endsWith("Bytes") &&
             allSyms.exists { sym =>
-              sym.typeSignatureIn(tpe).finalResultType.typeSymbol.fullName.toString == "java.lang.String" &&
+              sym.typeSignature.finalResultType.typeSymbol.fullName.toString == "java.lang.String" &&
                 sym.name.toString == symName.replaceAll("Bytes$", "")
             }
         case "scala.Int" =>
           // ignore int methods with Value suffix, generated for enums
           symName.endsWith("Value") &&
             allSyms.exists { sym =>
-              sym.typeSignatureIn(tpe).finalResultType.typeSymbol.isJavaEnum &&
+              sym.typeSignature.finalResultType.typeSymbol.isJavaEnum &&
                 sym.name.toString == symName.replaceAll("Value$", "")
             }
         case "scala.Boolean" =>
@@ -102,7 +102,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
           symName.endsWith("OrBuilder") &&
             allSyms.exists { sym =>
               sym.name.toString == symName.replaceAll("OrBuilder$", "") &&
-                sym.typeSignatureIn(tpe).finalResultType.baseClasses.exists {
+                sym.typeSignature.finalResultType.baseClasses.exists {
                   _.fullName.toString == "com.google.protobuf.Message"
                 }
             }
@@ -111,7 +111,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   }
 
   def fieldsResultTypesOf(tpe: Type): List[Type] =
-    fieldsOf(tpe).map(_.typeSignatureIn(tpe).finalResultType)
+    fieldsOf(tpe).map(_.typeSignature.finalResultType)
 
   def mkAttributedRef(tpe: Type): Tree = {
     // TODO review this! just copy-pasted from shapeless
