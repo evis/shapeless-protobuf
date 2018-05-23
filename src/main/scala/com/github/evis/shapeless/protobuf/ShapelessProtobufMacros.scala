@@ -73,22 +73,22 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     // TODO refactor it
     allSyms.filterNot { sym =>
       val symName = sym.name.toString
-      sym.typeSignature.finalResultType.typeSymbol.fullName match {
-        case "com.google.protobuf.ByteString" =>
+      sym.typeSignature.finalResultType match {
+        case tq"com.google.protobuf.ByteString" =>
           // ignore ByteString methods with Bytes suffix, generated for strings
           symName.endsWith("Bytes") &&
             allSyms.exists { sym =>
               sym.typeSignature.finalResultType.typeSymbol.fullName.toString == "java.lang.String" &&
                 sym.name.toString == symName.replaceAll("Bytes$", "")
             }
-        case "scala.Int" =>
+        case tq"scala.Int" =>
           // ignore int methods with Value suffix, generated for enums
           symName.endsWith("Value") &&
             allSyms.exists { sym =>
               sym.typeSignature.finalResultType.typeSymbol.isJavaEnum &&
                 sym.name.toString == symName.replaceAll("Value$", "")
             }
-        case "scala.Boolean" =>
+        case tq"scala.Boolean" =>
           // ignore methods for checking, if message contains inner message
           symName.startsWith("has")
         case _ =>
