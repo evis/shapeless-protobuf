@@ -36,9 +36,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def mkHListValue(tpe: Type, fields: List[TermSymbol], prefix: Tree): Tree = {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
       val fieldType = field.typeSignature.finalResultType
-      val isMsg = fieldType.baseClasses.exists {
-        _.fullName.toString == "com.google.protobuf.Message"
-      }
+      val isMsg = fieldType.baseClasses.contains(tq"com.google.protobuf.Message")
       if (isMsg) {
         q"_root_.shapeless.::(${mkHListValue(fieldType, fieldsOf(fieldType), q"$prefix.$field")}, $acc)"
       } else {
