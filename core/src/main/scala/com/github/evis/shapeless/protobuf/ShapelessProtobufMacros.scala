@@ -67,8 +67,12 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def fieldsOf(tpe: Type): List[TermSymbol] = {
     // protobuf fields info without lots of trash are contained in XXXOrBuilder interface
     // we filter methods like getDefaultInstanceForType(), getParserForType(), etc. from tpe class this way
-    val allSyms = tpe.baseClasses.find(_.fullName == tpe.typeSymbol + "OrBuilder")
-      .getOrElse(error(s"$tpe isn't protobuf type: ${tpe}OrBuilder type not found"))
+    val allSyms = tpe.baseClasses.find {
+      _.fullName match {
+        case "com.google.protobuf.MessageOrBuilder" => false
+        case name => name.endsWith("OrBuilder")
+      }
+    }.getOrElse(error(s"$tpe isn't protobuf type: ${tpe}OrBuilder type not found"))
       .asType.toType.decls.sorted.collect { case sym: TermSymbol => sym }
     // TODO refactor it
     allSyms.filterNot { sym =>
