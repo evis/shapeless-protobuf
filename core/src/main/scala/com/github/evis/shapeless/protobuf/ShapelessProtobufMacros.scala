@@ -78,7 +78,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
           // ignore ByteString methods with Bytes suffix, generated for strings
           symName.endsWith("Bytes") &&
             allSyms.exists { sym =>
-              sym.typeSignature.finalResultType == tq"java.lang.String" &&
+              sym.typeSignature.finalResultType.typeSymbol.fullName.toString == "java.lang.String" &&
                 sym.name.toString == symName.replaceAll("Bytes$", "")
             }
         case tq"scala.Int" =>
