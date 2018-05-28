@@ -28,7 +28,6 @@ lazy val core = {
       ),
       scalacOptions ++= Seq(
         "-Xlog-implicits",
-        "-Xprint:typer",
       ),
       addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
     )
