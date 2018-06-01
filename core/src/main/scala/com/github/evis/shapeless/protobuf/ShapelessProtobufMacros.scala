@@ -109,8 +109,11 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     fieldsOf(tpe).map(_.typeSignature.finalResultType)
 
   /** Returns true, if tpe is protobuf message; false otherwise. */
-  def isMsg(tpe: Type): Boolean =
-    tpe.baseClasses.contains(tq"com.google.protobuf.Message")
+  def isMsg(tpe: Type): Boolean = {
+    tpe.baseClasses.exists {
+      _.fullName.toString == "com.google.protobuf.Message"
+    }
+  }
 
   def mkAttributedRef(tpe: Type): Tree = {
     // TODO review this! just copy-pasted from shapeless
