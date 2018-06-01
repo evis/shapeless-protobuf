@@ -126,14 +126,11 @@ object ProtobufGenericSpec extends Properties("ProtobufGeneric") {
   }
 
   property("convert generic to nested") = {
-    forAll { repr: (String :: (Int :: String :: HNil) :: Int :: HNil) =>
-      repr match {
-        case s :: (ii :: is :: HNil) :: i :: HNil =>
-          repr.to[Nested] == {
-            val b = Nested.newBuilder()
-            b.setTestString(s).setTestInnerInt(i).getTestInnerBuilder.setTestInnerInt(ii).setTestInnerString(is)
-            b.build()
-          }
+    forAll { (s: String, ii: Int, is: String, i: Int) =>
+      (s :: (ii :: is :: HNil) :: i :: HNil).to[Nested] == {
+        val b = Nested.newBuilder()
+        b.setTestString(s).setTestInnerInt(i).getTestInnerBuilder.setTestInnerInt(ii).setTestInnerString(is)
+        b.build()
       }
     }
   }
