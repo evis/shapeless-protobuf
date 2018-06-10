@@ -174,7 +174,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def mkCompoundTypTree(nil: Type, cons: Type, items: List[Type]): Tree = {
     // TODO review this! just copy-pasted from shapeless
     items.foldRight(mkAttributedRef(nil): Tree) { case (tpe, acc) =>
-      if (tpe == typeOf[Option[Inner]]) {
+      if (tpe.typeConstructor.typeSymbol.fullName == "scala.Option") {
         val optTypTree = mkOptionTypTree(optTpe, tpe.typeArgs.head)
         AppliedTypeTree(mkAttributedRef(cons), List(optTypTree, acc))
       } else {
