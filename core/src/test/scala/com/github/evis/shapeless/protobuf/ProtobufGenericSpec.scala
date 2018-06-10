@@ -119,19 +119,32 @@ object ProtobufGenericSpec extends Properties("ProtobufGeneric") {
   }
 
   property("convert nested to generic") = {
-    forAll { p: Nested =>
-      val i = p.getTestInner
-      p.toHList == p.getTestString :: (i.getTestInnerInt :: i.getTestInnerString :: HNil) :: p.getTestInnerInt :: HNil
+    forAll { (base: Nested, i: Inner) =>
+      val p = base.toBuilder.setTestInner(i).build()
+      p.toHList == p.getTestString :: Some(i.getTestInnerInt :: i.getTestInnerString :: HNil) :: p.getTestInnerInt :: HNil
     }
   }
 
   property("convert generic to nested") = {
     forAll { (s: String, ii: Int, is: String, i: Int) =>
-      (s :: (ii :: is :: HNil) :: i :: HNil).to[Nested] == {
+      (s :: Option(ii :: is :: HNil) :: i :: HNil).to[Nested] == {
         val b = Nested.newBuilder()
         b.setTestString(s).setTestInnerInt(i).getTestInnerBuilder.setTestInnerInt(ii).setTestInnerString(is)
         b.build()
       }
+    }
+  }
+
+  property("convert nested without inner to generic") = {
+    forAll { base: Nested =>
+      val p = base.toBuilder.clearTestInner().build()
+      p.toHList == p.getTestString :: None :: p.getTestInnerInt :: HNil
+    }
+  }
+
+  property("convert generic to nested without inner") = {
+    forAll { (s: String, i: Int) =>
+      (s :: Option.empty[Int :: String :: HNil] :: i :: HNil).to[Nested] == Nested.newBuilder().setTestString(s).setTestInnerInt(i).build()
     }
   }
 }

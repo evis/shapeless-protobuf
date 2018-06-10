@@ -1,5 +1,6 @@
 package com.github.evis.shapeless.protobuf
 
+import com.github.evis.shapeless.protobuf.TestMessages.{Inner, Nested}
 import shapeless.{::, HNil}
 
 import scala.reflect.macros.whitebox
@@ -12,8 +13,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
     val to = mkHListValue(tpe, fieldsOf(tpe), q"p")
-    val (pattern, builder) = mkFrom(tpe)
-    val from = cq" $pattern => $builder.build()"
+    val from = mkFrom(tpe)
     val clsName = TypeName(c.freshName("anon$"))
     q"""
       final class $clsName extends _root_.shapeless.Generic[$tpe] {
@@ -27,6 +27,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
 
   def hnilTpe: Type = typeOf[HNil]
   def hconsTpe: Type = typeOf[::[_, _]].typeConstructor
+  def optTpe: Type = typeOf[Option[_]].typeConstructor
 
   def reprTypTree(tpe: Type): Tree = {
     val fields = fieldsResultTypesOf(tpe)
@@ -36,31 +37,52 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def mkHListValue(tpe: Type, fields: List[TermSymbol], prefix: Tree): Tree = {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
       val fieldType = field.typeSignature.finalResultType
-      if (isMsg(fieldType)) {
-        q"_root_.shapeless.::(${mkHListValue(fieldType, fieldsOf(fieldType), q"$prefix.$field")}, $acc)"
+      if (isOptional(tpe, field)) {
+        val hasField = TermName(field.name.toString.replaceFirst("^get", "has"))
+        if (isMsg(fieldType)) {
+          q"_root_.shapeless.::(if ($prefix.$hasField) (_root_.scala.Some(_root_.shapeless.Generic[$fieldType].to($prefix.$field))) else _root_.scala.None, $acc)"
+        } else {
+          q"_root_.shapeless.::(if ($prefix.$hasField) (_root_.scala.Some($prefix.$field)) else _root_.scala.None, $acc)"
+        }
+      } else if (isMsg(fieldType)) {
+        q"_root_.shapeless.::(_root_.shapeless.Generic[$fieldType].to($prefix.$field), $acc)"
       } else {
         q"_root_.shapeless.::($prefix.$field, $acc)"
       }
     }
   }
 
-  def mkFrom(tpe: Type): (Tree, Tree) = {
-    fieldsOf(tpe).foldRight((q"_root_.shapeless.HNil": Tree, q"${tpe.companion}.newBuilder()")) {
+  def mkFrom(tpe: Type): Tree = {
+    val b = TermName(c.freshName("b"))
+    val (pattern, builder) = fieldsOf(tpe).foldRight((q"_root_.shapeless.HNil": Tree, q"val $b = ${tpe.companion}.newBuilder()": Tree)) {
       case (field, (patternAcc, builderAcc)) =>
         val setter = TermName(field.name.toString.replaceFirst("get", "set"))
         val fieldType = field.typeSignature.resultType
-        if (isMsg(fieldType)) {
-          val (msgPattern, msgBuilder) = mkFrom(fieldType)
-          val pattern = pq"_root_.shapeless.::(($msgPattern), $patternAcc)"
-          val builder = q"$builderAcc.$setter($msgBuilder)"
+        if (isOptional(tpe, field)) {
+          if (isMsg(fieldType)) {
+            val patName = TermName(c.freshName("pat"))
+            val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+            val builder = q"..$builderAcc; $patName.foreach(_root_.shapeless.Generic[$fieldType].from _ andThen $b.$setter)"
+            (pattern, builder)
+          } else {
+            val patName = TermName(c.freshName("pat"))
+            val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+            val builder = q"..$builderAcc; $patName.foreach($b.$setter)"
+            (pattern, builder)
+          }
+        } else if (isMsg(fieldType)) {
+          val patName = TermName(c.freshName("pat"))
+          val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+          val builder = q"..$builderAcc; $b.$setter(_root_.shapeless.Generic[$fieldType].from($patName))"
           (pattern, builder)
         } else {
           val patName = TermName(c.freshName("pat"))
           val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
-          val builder = q"$builderAcc.$setter($patName)"
+          val builder = q"..$builderAcc; $b.$setter($patName)"
           (pattern, builder)
         }
     }
+    cq" $pattern => ..$builder; $b.build()"
   }
 
   /** Returns list of protobuf field getters for $tpe. */
@@ -106,13 +128,30 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   }
 
   def fieldsResultTypesOf(tpe: Type): List[Type] =
-    fieldsOf(tpe).map(_.typeSignature.finalResultType)
+    fieldsOf(tpe).map { field =>
+      if (isOptional(tpe, field)) {
+        typeOf[Option[Inner]]
+        //q"def x: _root_.scala.Option[${field.typeSignature.finalResultType}]".symbol.asTerm.typeSignature.finalResultType
+        //AppliedTypeTree(q"_root_.scala.Option", List(q"${field.typeSignature.finalResultType}")).tpe
+        //q"${mkOptionTypTree(optTpe, field.typeSignature.finalResultType)}"
+      } else {
+        field.typeSignature.finalResultType
+      }
+    }
 
   /** Returns true, if tpe is protobuf message; false otherwise. */
   def isMsg(tpe: Type): Boolean = {
     tpe.baseClasses.exists {
       _.fullName.toString == "com.google.protobuf.Message"
     }
+  }
+
+  def isOptional(tpe: Type, field: TermSymbol): Boolean =
+    hasMethod(tpe, field.name.toString.replaceFirst("^get", "has"))
+
+  def hasMethod(tpe: Type, method: String): Boolean = {
+    tpe.decls.sorted.collect { case sym: TermSymbol => sym }
+      .exists(_.name.toString == method)
   }
 
   def mkAttributedRef(tpe: Type): Tree = {
@@ -135,8 +174,17 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def mkCompoundTypTree(nil: Type, cons: Type, items: List[Type]): Tree = {
     // TODO review this! just copy-pasted from shapeless
     items.foldRight(mkAttributedRef(nil): Tree) { case (tpe, acc) =>
-      AppliedTypeTree(mkAttributedRef(cons), List(mkTypTree(tpe), acc))
+      if (tpe == typeOf[Option[Inner]]) {
+        val optTypTree = mkOptionTypTree(optTpe, tpe.typeArgs.head)
+        AppliedTypeTree(mkAttributedRef(cons), List(optTypTree, acc))
+      } else {
+        AppliedTypeTree(mkAttributedRef(cons), List(mkTypTree(tpe), acc))
+      }
     }
+  }
+
+  def mkOptionTypTree(opt: Type, value: Type): Tree = {
+    AppliedTypeTree(mkAttributedRef(opt), List(mkTypTree(value)))
   }
 
   def mkTypTree(tpe: Type): Tree = {
