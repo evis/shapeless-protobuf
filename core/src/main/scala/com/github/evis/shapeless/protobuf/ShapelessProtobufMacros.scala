@@ -1,6 +1,6 @@
 package com.github.evis.shapeless.protobuf
 
-import com.github.evis.shapeless.protobuf.TestMessages.{Inner, Nested}
+import com.github.evis.shapeless.protobuf.TestMessages.Inner
 import shapeless.{::, HNil}
 
 import scala.reflect.macros.whitebox
