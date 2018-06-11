@@ -1,6 +1,5 @@
 package com.github.evis.shapeless.protobuf
 
-import com.github.evis.shapeless.protobuf.TestMessages.Inner
 import shapeless.{::, HNil}
 
 import scala.reflect.macros.whitebox
@@ -12,7 +11,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def protobufGeneric[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
-    val to = mkHListValue(tpe, fieldsOf(tpe), q"p")
+    val to = mkHListValue(tpe, fieldsOf(tpe).map(_.symbol), q"p")
     val from = mkFrom(tpe)
     val clsName = TypeName(c.freshName("anon$"))
     q"""
@@ -30,7 +29,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def optTpe: Type = typeOf[Option[_]].typeConstructor
 
   def reprTypTree(tpe: Type): Tree = {
-    val fields = fieldsResultTypesOf(tpe)
+    val fields = fieldsOf(tpe)
     mkCompoundTypTree(hnilTpe, hconsTpe, fields)
   }
 
@@ -55,38 +54,41 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def mkFrom(tpe: Type): Tree = {
     val b = TermName(c.freshName("b"))
     val (pattern, builder) = fieldsOf(tpe).foldRight((q"_root_.shapeless.HNil": Tree, q"val $b = ${tpe.companion}.newBuilder()": Tree)) {
-      case (field, (patternAcc, builderAcc)) =>
-        val setter = TermName(field.name.toString.replaceFirst("get", "set"))
-        val fieldType = field.typeSignature.resultType
-        if (isOptional(tpe, field)) {
-          if (isMsg(fieldType)) {
-            val patName = TermName(c.freshName("pat"))
-            val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
-            val builder = q"..$builderAcc; $patName.foreach(_root_.shapeless.Generic[$fieldType].from _ andThen $b.$setter)"
-            (pattern, builder)
-          } else {
-            val patName = TermName(c.freshName("pat"))
-            val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
-            val builder = q"..$builderAcc; $patName.foreach($b.$setter)"
-            (pattern, builder)
-          }
-        } else if (isMsg(fieldType)) {
-          val patName = TermName(c.freshName("pat"))
-          val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
-          val builder = q"..$builderAcc; $b.$setter(_root_.shapeless.Generic[$fieldType].from($patName))"
-          (pattern, builder)
-        } else {
-          val patName = TermName(c.freshName("pat"))
-          val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
-          val builder = q"..$builderAcc; $b.$setter($patName)"
-          (pattern, builder)
+      case (Field(symbol, kind), (patternAcc, builderAcc)) =>
+        val setter = TermName(symbol.name.toString.replaceFirst("get", "set"))
+        val fieldType = symbol.typeSignature.resultType
+        kind match {
+          case Optional =>
+            if (isMsg(fieldType)) {
+              val patName = TermName(c.freshName("pat"))
+              val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+              val builder = q"..$builderAcc; $patName.foreach(_root_.shapeless.Generic[$fieldType].from _ andThen $b.$setter)"
+              (pattern, builder)
+            } else {
+              val patName = TermName(c.freshName("pat"))
+              val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+              val builder = q"..$builderAcc; $patName.foreach($b.$setter)"
+              (pattern, builder)
+            }
+          case Required =>
+            if (isMsg(fieldType)) {
+              val patName = TermName(c.freshName("pat"))
+              val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+              val builder = q"..$builderAcc; $b.$setter(_root_.shapeless.Generic[$fieldType].from($patName))"
+              (pattern, builder)
+            } else {
+              val patName = TermName(c.freshName("pat"))
+              val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+              val builder = q"..$builderAcc; $b.$setter($patName)"
+              (pattern, builder)
+            }
         }
     }
     cq" $pattern => ..$builder; $b.build()"
   }
 
   /** Returns list of protobuf field getters for $tpe. */
-  def fieldsOf(tpe: Type): List[TermSymbol] = {
+  def fieldsOf(tpe: Type): List[Field] = {
     // protobuf fields info without lots of trash are contained in XXXOrBuilder interface
     // we filter methods like getDefaultInstanceForType(), getParserForType(), etc. from tpe class this way
     val allSyms = tpe.baseClasses.find {
@@ -124,20 +126,11 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
                 isMsg(sym.typeSignature.finalResultType)
             }
       }
+    }.map { sym =>
+      val kind = if (isOptional(tpe, sym)) Optional else Required
+      Field(sym, kind)
     }
   }
-
-  def fieldsResultTypesOf(tpe: Type): List[Type] =
-    fieldsOf(tpe).map { field =>
-      if (isOptional(tpe, field)) {
-        typeOf[Option[Inner]]
-        //q"def x: _root_.scala.Option[${field.typeSignature.finalResultType}]".symbol.asTerm.typeSignature.finalResultType
-        //AppliedTypeTree(q"_root_.scala.Option", List(q"${field.typeSignature.finalResultType}")).tpe
-        //q"${mkOptionTypTree(optTpe, field.typeSignature.finalResultType)}"
-      } else {
-        field.typeSignature.finalResultType
-      }
-    }
 
   /** Returns true, if tpe is protobuf message; false otherwise. */
   def isMsg(tpe: Type): Boolean = {
@@ -171,14 +164,16 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     global.gen.mkAttributedRef(gPre, gSym).asInstanceOf[Tree]
   }
 
-  def mkCompoundTypTree(nil: Type, cons: Type, items: List[Type]): Tree = {
+  def mkCompoundTypTree(nil: Type, cons: Type, items: List[Field]): Tree = {
     // TODO review this! just copy-pasted from shapeless
-    items.foldRight(mkAttributedRef(nil): Tree) { case (tpe, acc) =>
-      if (tpe.typeConstructor.typeSymbol.fullName == "scala.Option") {
-        val optTypTree = mkOptionTypTree(optTpe, tpe.typeArgs.head)
-        AppliedTypeTree(mkAttributedRef(cons), List(optTypTree, acc))
-      } else {
-        AppliedTypeTree(mkAttributedRef(cons), List(mkTypTree(tpe), acc))
+    items.foldRight(mkAttributedRef(nil): Tree) { case (Field(symbol, kind), acc) =>
+      val tpe = symbol.typeSignature.finalResultType
+      kind match {
+        case Optional =>
+          val optTypTree = mkOptionTypTree(optTpe, tpe)
+          AppliedTypeTree(mkAttributedRef(cons), List(optTypTree, acc))
+        case Required =>
+          AppliedTypeTree(mkAttributedRef(cons), List(mkTypTree(tpe), acc))
       }
     }
   }
@@ -197,4 +192,10 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
       case t => tq"$t"
     }
   }
+
+  sealed trait FieldKind
+  final case object Required extends FieldKind
+  final case object Optional extends FieldKind
+
+  final case class Field(symbol: TermSymbol, kind: FieldKind)
 }
