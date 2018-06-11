@@ -11,6 +11,9 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   val hnilTpe: Type = typeOf[HNil]
   val hconsTpe: Type = typeOf[::[_, _]].typeConstructor
   val optTpe: Type = typeOf[Option[_]].typeConstructor
+  val strTpe: Type = typeOf[String]
+  val intTpe: Type = typeOf[Int]
+  val boolTpe: Type = typeOf[Boolean]
 
   def protobufGeneric[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
@@ -93,24 +96,25 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     // TODO refactor it
     allSyms.filterNot { sym =>
       val symName = sym.name.toString
-      sym.typeSignature.finalResultType.typeSymbol.fullName match {
-        case "com.google.protobuf.ByteString" =>
-          // ignore ByteString methods with Bytes suffix, generated for strings
-          symName.endsWith("Bytes") &&
-            allSyms.exists { sym =>
-              sym.typeSignature.finalResultType.typeSymbol.fullName.toString == "java.lang.String" &&
-                sym.name.toString == symName.replaceAll("Bytes$", "")
-            }
-        case "scala.Int" =>
+      sym.typeSignature.finalResultType match {
+        case `intTpe` =>
           // ignore int methods with Value suffix, generated for enums
           symName.endsWith("Value") &&
             allSyms.exists { sym =>
               sym.typeSignature.finalResultType.typeSymbol.isJavaEnum &&
                 sym.name.toString == symName.replaceAll("Value$", "")
             }
-        case "scala.Boolean" =>
+        case `boolTpe` =>
           // ignore methods for checking, if message contains inner message
           symName.startsWith("has")
+        // string-checking to avoid dependency on protobuf-java
+        case symTpe if symTpe.typeSymbol.fullName == "com.google.protobuf.ByteString" =>
+          // ignore ByteString methods with Bytes suffix, generated for strings
+          symName.endsWith("Bytes") &&
+            allSyms.exists { sym =>
+              sym.typeSignature.finalResultType.typeSymbol.fullName.toString == "java.lang.String" &&
+                sym.name.toString == symName.replaceAll("Bytes$", "")
+            }
         case _ =>
           symName.endsWith("OrBuilder") &&
             allSyms.exists { sym =>
