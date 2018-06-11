@@ -37,21 +37,22 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
       val fieldSym = field.symbol
       val fieldType = fieldSym.typeSignature.finalResultType
-      field.kind match {
+      val head = field.kind match {
         case Optional =>
           val hasField = TermName(fieldSym.name.toString.replaceFirst("^get", "has"))
           if (isMsg(fieldType)) {
-            q"_root_.shapeless.::(if ($prefix.$hasField) (_root_.scala.Some(_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym))) else _root_.scala.None, $acc)"
+            q"if ($prefix.$hasField) (_root_.scala.Some(_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym))) else _root_.scala.None"
           } else {
-            q"_root_.shapeless.::(if ($prefix.$hasField) (_root_.scala.Some($prefix.$fieldSym)) else _root_.scala.None, $acc)"
+            q"if ($prefix.$hasField) (_root_.scala.Some($prefix.$fieldSym)) else _root_.scala.None"
           }
         case Required =>
           if (isMsg(fieldType)) {
-            q"_root_.shapeless.::(_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym), $acc)"
+            q"_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym)"
           } else {
-            q"_root_.shapeless.::($prefix.$fieldSym, $acc)"
+            q"$prefix.$fieldSym"
           }
       }
+      q"_root_.shapeless.::($head, $acc)"
     }
   }
 
