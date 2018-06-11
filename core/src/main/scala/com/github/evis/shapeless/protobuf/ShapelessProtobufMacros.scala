@@ -11,14 +11,15 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def protobufGeneric[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
-    val to = mkHListValue(tpe, fieldsOf(tpe), q"p")
+    val p = TermName(c.freshName("p"))
+    val to = mkHListValue(tpe, fieldsOf(tpe), q"$p")
     val from = mkFrom(tpe)
     val clsName = TypeName(c.freshName("anon$"))
     q"""
       final class $clsName extends _root_.shapeless.Generic[$tpe] {
         type Repr = $repr
-        def to(p: $tpe): Repr = $to
-        def from(p: Repr): $tpe = p match { case $from }
+        def to($p: $tpe): Repr = $to
+        def from($p: Repr): $tpe = $p match { case $from }
       }
       new $clsName(): _root_.shapeless.Generic.Aux[$tpe, $repr]
     """
