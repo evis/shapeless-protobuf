@@ -12,6 +12,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   val hconsTpe: Type = typeOf[::[_, _]].typeConstructor
   val optTpe: Type = typeOf[Option[_]].typeConstructor
   val strTpe: Type = typeOf[String]
+  val jstrTpe: Type = typeOf[java.lang.String]
   val intTpe: Type = typeOf[Int]
   val boolTpe: Type = typeOf[Boolean]
 
@@ -112,7 +113,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
           // ignore ByteString methods with Bytes suffix, generated for strings
           symName.endsWith("Bytes") &&
             allSyms.exists { sym =>
-              sym.typeSignature.finalResultType.typeSymbol.fullName.toString == "java.lang.String" &&
+              sym.typeSignature.finalResultType == jstrTpe &&
                 sym.name.toString == symName.replaceAll("Bytes$", "")
             }
         case _ =>
