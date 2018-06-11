@@ -55,27 +55,29 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
 
   def mkFrom(tpe: Type): Tree = {
     val b = TermName(c.freshName("b"))
-    val (pattern, builder) = fieldsOf(tpe).foldRight((q"_root_.shapeless.HNil": Tree, q"val $b = ${tpe.companion}.newBuilder()": Tree)) {
-      case (Field(symbol, kind), (patternAcc, builderAcc)) =>
-        val setter = TermName(symbol.name.toString.replaceFirst("get", "set"))
-        val fieldType = symbol.typeSignature.resultType
-        val patName = TermName(c.freshName("pat"))
-        val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
-        val builder = kind match {
-          case Optional =>
-            if (isMsg(fieldType)) {
-              q"..$builderAcc; $patName.foreach(_root_.shapeless.Generic[$fieldType].from _ andThen $b.$setter)"
-            } else {
-              q"..$builderAcc; $patName.foreach($b.$setter)"
-            }
-          case Required =>
-            if (isMsg(fieldType)) {
-              q"..$builderAcc; $b.$setter(_root_.shapeless.Generic[$fieldType].from($patName))"
-            } else {
-              q"..$builderAcc; $b.$setter($patName)"
-            }
-        }
-        pattern -> builder
+    val (pattern, builder) = {
+      fieldsOf(tpe).foldRight((q"_root_.shapeless.HNil": Tree, q"val $b = ${tpe.companion}.newBuilder()": Tree)) {
+        case (Field(symbol, kind), (patternAcc, builderAcc)) =>
+          val setter = TermName(symbol.name.toString.replaceFirst("get", "set"))
+          val fieldType = symbol.typeSignature.resultType
+          val patName = TermName(c.freshName("pat"))
+          val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
+          val builder = kind match {
+            case Optional =>
+              if (isMsg(fieldType)) {
+                q"..$builderAcc; $patName.foreach(_root_.shapeless.Generic[$fieldType].from _ andThen $b.$setter)"
+              } else {
+                q"..$builderAcc; $patName.foreach($b.$setter)"
+              }
+            case Required =>
+              if (isMsg(fieldType)) {
+                q"..$builderAcc; $b.$setter(_root_.shapeless.Generic[$fieldType].from($patName))"
+              } else {
+                q"..$builderAcc; $b.$setter($patName)"
+              }
+          }
+          pattern -> builder
+      }
     }
     cq" $pattern => ..$builder; $b.build()"
   }
