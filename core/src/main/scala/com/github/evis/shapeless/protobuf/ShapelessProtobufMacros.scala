@@ -61,22 +61,21 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
           val setter = TermName(symbol.name.toString.replaceFirst("get", "set"))
           val fieldType = symbol.typeSignature.resultType
           val patName = TermName(c.freshName("pat"))
-          val pattern = pq"_root_.shapeless.::($patName, $patternAcc)"
-          val builder = kind match {
+          val setField = kind match {
             case Optional =>
               if (isMsg(fieldType)) {
-                q"..$builderAcc; $patName.foreach(_root_.shapeless.Generic[$fieldType].from _ andThen $b.$setter)"
+                q"$patName.foreach(_root_.shapeless.Generic[$fieldType].from _ andThen $b.$setter)"
               } else {
-                q"..$builderAcc; $patName.foreach($b.$setter)"
+                q"$patName.foreach($b.$setter)"
               }
             case Required =>
               if (isMsg(fieldType)) {
-                q"..$builderAcc; $b.$setter(_root_.shapeless.Generic[$fieldType].from($patName))"
+                q"$b.$setter(_root_.shapeless.Generic[$fieldType].from($patName))"
               } else {
-                q"..$builderAcc; $b.$setter($patName)"
+                q"$b.$setter($patName)"
               }
           }
-          pattern -> builder
+          pq"_root_.shapeless.::($patName, $patternAcc)" -> q"..$builderAcc; $setField"
       }
     }
     cq" $pattern => ..$builder; $b.build()"
