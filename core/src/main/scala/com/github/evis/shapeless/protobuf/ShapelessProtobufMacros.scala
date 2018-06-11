@@ -11,7 +11,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   def protobufGeneric[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
-    val to = mkHListValue(tpe, fieldsOf(tpe).map(_.symbol), q"p")
+    val to = mkHListValue(tpe, fieldsOf(tpe), q"p")
     val from = mkFrom(tpe)
     val clsName = TypeName(c.freshName("anon$"))
     q"""
@@ -33,20 +33,24 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     mkCompoundTypTree(hnilTpe, hconsTpe, fields)
   }
 
-  def mkHListValue(tpe: Type, fields: List[TermSymbol], prefix: Tree): Tree = {
+  def mkHListValue(tpe: Type, fields: List[Field], prefix: Tree): Tree = {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
-      val fieldType = field.typeSignature.finalResultType
-      if (isOptional(tpe, field)) {
-        val hasField = TermName(field.name.toString.replaceFirst("^get", "has"))
-        if (isMsg(fieldType)) {
-          q"_root_.shapeless.::(if ($prefix.$hasField) (_root_.scala.Some(_root_.shapeless.Generic[$fieldType].to($prefix.$field))) else _root_.scala.None, $acc)"
-        } else {
-          q"_root_.shapeless.::(if ($prefix.$hasField) (_root_.scala.Some($prefix.$field)) else _root_.scala.None, $acc)"
-        }
-      } else if (isMsg(fieldType)) {
-        q"_root_.shapeless.::(_root_.shapeless.Generic[$fieldType].to($prefix.$field), $acc)"
-      } else {
-        q"_root_.shapeless.::($prefix.$field, $acc)"
+      val fieldSym = field.symbol
+      val fieldType = fieldSym.typeSignature.finalResultType
+      field.kind match {
+        case Optional =>
+          val hasField = TermName(fieldSym.name.toString.replaceFirst("^get", "has"))
+          if (isMsg(fieldType)) {
+            q"_root_.shapeless.::(if ($prefix.$hasField) (_root_.scala.Some(_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym))) else _root_.scala.None, $acc)"
+          } else {
+            q"_root_.shapeless.::(if ($prefix.$hasField) (_root_.scala.Some($prefix.$fieldSym)) else _root_.scala.None, $acc)"
+          }
+        case Required =>
+          if (isMsg(fieldType)) {
+            q"_root_.shapeless.::(_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym), $acc)"
+          } else {
+            q"_root_.shapeless.::($prefix.$fieldSym, $acc)"
+          }
       }
     }
   }
@@ -126,10 +130,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
                 isMsg(sym.typeSignature.finalResultType)
             }
       }
-    }.map { sym =>
-      val kind = if (isOptional(tpe, sym)) Optional else Required
-      Field(sym, kind)
-    }
+    }.map(Field(tpe, _))
   }
 
   /** Returns true, if tpe is protobuf message; false otherwise. */
@@ -137,14 +138,6 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     tpe.baseClasses.exists {
       _.fullName.toString == "com.google.protobuf.Message"
     }
-  }
-
-  def isOptional(tpe: Type, field: TermSymbol): Boolean =
-    hasMethod(tpe, field.name.toString.replaceFirst("^get", "has"))
-
-  def hasMethod(tpe: Type, method: String): Boolean = {
-    tpe.decls.sorted.collect { case sym: TermSymbol => sym }
-      .exists(_.name.toString == method)
   }
 
   def mkAttributedRef(tpe: Type): Tree = {
@@ -198,4 +191,26 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   final case object Optional extends FieldKind
 
   final case class Field(symbol: TermSymbol, kind: FieldKind)
+
+  final object Field {
+
+    def apply(tpe: Type, symbol: TermSymbol): Field = {
+      val kind = {
+        if (isOptional(tpe, symbol)) {
+          Optional
+        } else {
+          Required
+        }
+      }
+      Field(symbol, kind)
+    }
+
+    private def isOptional(tpe: Type, field: TermSymbol): Boolean =
+      hasMethod(tpe, field.name.toString.replaceFirst("^get", "has"))
+
+    private def hasMethod(tpe: Type, method: String): Boolean = {
+      tpe.decls.sorted.collect { case sym: TermSymbol => sym }
+        .exists(_.name.toString == method)
+    }
+  }
 }
