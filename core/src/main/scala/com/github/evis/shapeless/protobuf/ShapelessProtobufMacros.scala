@@ -57,23 +57,19 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     val b = TermName(c.freshName("b"))
     val (pattern, builder) = {
       fieldsOf(tpe).foldRight((q"_root_.shapeless.HNil": Tree, q"val $b = ${tpe.companion}.newBuilder()": Tree)) {
-        case (Field(symbol, kind), (patternAcc, builderAcc)) =>
+        case (Field(symbol, kind, fieldType), (patternAcc, builderAcc)) =>
           val setter = TermName(symbol.name.toString.replaceFirst("get", "set"))
-          val fieldType = symbol.typeSignature.resultType
+          val fieldResultType = symbol.typeSignature.resultType
           val patName = TermName(c.freshName("pat"))
-          val setField = kind match {
-            case Optional =>
-              if (isMsg(fieldType)) {
-                q"$patName.foreach(_root_.shapeless.Generic[$fieldType].from _ andThen $b.$setter)"
-              } else {
-                q"$patName.foreach($b.$setter)"
-              }
-            case Required =>
-              if (isMsg(fieldType)) {
-                q"$b.$setter(_root_.shapeless.Generic[$fieldType].from($patName))"
-              } else {
-                q"$b.$setter($patName)"
-              }
+          val setField = (kind, fieldType) match {
+            case (Optional, Message) =>
+              q"$patName.foreach(_root_.shapeless.Generic[$fieldResultType].from _ andThen $b.$setter)"
+            case (Optional, Scalar) =>
+              q"$patName.foreach($b.$setter)"
+            case (Required, Message) =>
+              q"$b.$setter(_root_.shapeless.Generic[$fieldResultType].from($patName))"
+            case (Required, Scalar) =>
+              q"$b.$setter($patName)"
           }
           pq"_root_.shapeless.::($patName, $patternAcc)" -> q"..$builderAcc; $setField"
       }
@@ -149,7 +145,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
 
   def mkCompoundTypTree(nil: Type, cons: Type, items: List[Field]): Tree = {
     // TODO review this! just copy-pasted from shapeless
-    items.foldRight(mkAttributedRef(nil): Tree) { case (Field(symbol, kind), acc) =>
+    items.foldRight(mkAttributedRef(nil): Tree) { case (Field(symbol, kind, _), acc) =>
       val tpe = symbol.typeSignature.finalResultType
       kind match {
         case Optional =>
@@ -180,7 +176,11 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   final case object Required extends FieldKind
   final case object Optional extends FieldKind
 
-  final case class Field(symbol: TermSymbol, kind: FieldKind)
+  sealed trait FieldType
+  final case object Message extends FieldType
+  final case object Scalar extends FieldType
+
+  final case class Field(symbol: TermSymbol, kind: FieldKind, fieldType: FieldType)
 
   final object Field {
 
@@ -192,7 +192,14 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
           Required
         }
       }
-      Field(symbol, kind)
+      val fieldType = {
+        if (isMsg(symbol.typeSignature.finalResultType)) {
+          Message
+        } else {
+          Scalar
+        }
+      }
+      Field(symbol, kind, fieldType)
     }
 
     private def isOptional(tpe: Type, field: TermSymbol): Boolean =
