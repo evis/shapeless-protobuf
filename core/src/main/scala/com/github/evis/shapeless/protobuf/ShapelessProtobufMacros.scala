@@ -37,20 +37,17 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
       val fieldSym = field.symbol
       val fieldType = fieldSym.typeSignature.finalResultType
+      val value = if (isMsg(fieldType)) {
+        q"_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym)"
+      } else {
+        q"$prefix.$fieldSym"
+      }
       val head = field.kind match {
         case Optional =>
           val hasField = TermName(fieldSym.name.toString.replaceFirst("^get", "has"))
-          if (isMsg(fieldType)) {
-            q"if ($prefix.$hasField) (_root_.scala.Some(_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym))) else _root_.scala.None"
-          } else {
-            q"if ($prefix.$hasField) (_root_.scala.Some($prefix.$fieldSym)) else _root_.scala.None"
-          }
+          q"if ($prefix.$hasField) (_root_.scala.Some($value)) else _root_.scala.None"
         case Required =>
-          if (isMsg(fieldType)) {
-            q"_root_.shapeless.Generic[$fieldType].to($prefix.$fieldSym)"
-          } else {
-            q"$prefix.$fieldSym"
-          }
+          value
       }
       q"_root_.shapeless.::($head, $acc)"
     }
