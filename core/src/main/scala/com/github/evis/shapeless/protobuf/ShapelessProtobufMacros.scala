@@ -8,6 +8,10 @@ import scala.sys.error
 private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   import c.universe._
 
+  val hnilTpe: Type = typeOf[HNil]
+  val hconsTpe: Type = typeOf[::[_, _]].typeConstructor
+  val optTpe: Type = typeOf[Option[_]].typeConstructor
+
   def protobufGeneric[T: WeakTypeTag, R: WeakTypeTag]: Tree = {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
@@ -24,10 +28,6 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
       new $clsName(): _root_.shapeless.Generic.Aux[$tpe, $repr]
     """
   }
-
-  def hnilTpe: Type = typeOf[HNil]
-  def hconsTpe: Type = typeOf[::[_, _]].typeConstructor
-  def optTpe: Type = typeOf[Option[_]].typeConstructor
 
   def reprTypTree(tpe: Type): Tree = {
     val fields = fieldsOf(tpe)
