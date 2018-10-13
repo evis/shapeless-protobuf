@@ -20,7 +20,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     val tpe = weakTypeOf[T]
     val repr = reprTypTree(tpe)
     val p = TermName(c.freshName("p"))
-    val to = mkHListValue(tpe, fieldsOf(tpe), q"$p")
+    val to = mkHListValue(fieldsOf(tpe), q"$p")
     val from = mkFrom(tpe)
     val clsName = TypeName(c.freshName("anon$"))
     q"""
@@ -38,7 +38,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
     mkCompoundTypTree(hnilTpe, hconsTpe, fields)
   }
 
-  def mkHListValue(tpe: Type, fields: List[Field], prefix: Tree): Tree = {
+  def mkHListValue(fields: List[Field], prefix: Tree): Tree = {
     fields.foldRight(q"_root_.shapeless.HNil": Tree) { (field, acc) =>
       val fieldSym = field.symbol
       val fieldType = fieldSym.typeSignature.finalResultType
@@ -187,7 +187,8 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
   final case object Message extends FieldType
   final case object Scalar extends FieldType
 
-  final case class Field(symbol: TermSymbol, kind: FieldKind, fieldType: FieldType)
+  // sealed instead of final to avoid https://issues.scala-lang.org/browse/SI-4440
+  sealed case class Field(symbol: TermSymbol, kind: FieldKind, fieldType: FieldType)
 
   final object Field {
 
