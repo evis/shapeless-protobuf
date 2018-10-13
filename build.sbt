@@ -1,34 +1,51 @@
-name := "shapeless-protobuf"
+import sbt._
+import Keys._
 
-version := "0.1"
+val paradiseVersion = "2.1.0"
+val buildSettings = Defaults.coreDefaultSettings ++ Seq(
+  organization := "com.evis.github",
+  version := "0.1.0",
+  scalaVersion := "2.12.6",
+  scalacOptions ++= Seq(
+    "-Xlog-implicits",
+  ),
+  crossScalaVersions := Seq("2.10.2", "2.10.3", "2.10.4", "2.10.5", "2.10.6",
+    "2.11.0", "2.11.1", "2.11.2", "2.11.3", "2.11.4",
+    "2.11.5", "2.11.6", "2.11.7", "2.11.8",
+    "2.12.0", "2.12.1", "2.12.2", "2.12.3", "2.12.4", "2.12.5", "2.12.6"),
+  resolvers += Resolver.sonatypeRepo("snapshots"),
+  resolvers += Resolver.sonatypeRepo("releases"),
+  addCompilerPlugin("org.scalamacros" % "paradise" % paradiseVersion cross CrossVersion.full)
+)
 
-scalaVersion := "2.12.6"
+lazy val root: Project = {
+  project.in(file("."))
+    .settings(buildSettings ++ Seq(run := (run in Compile in core).evaluated))
+    .aggregate(macros, core)
+}
 
-lazy val testMessages = {
-  (project in file("test-messages"))
-    .settings(
-      name := "shapeless-protobuf-test-messages",
-      libraryDependencies ++= Seq(
-        "com.google.protobuf" % "protobuf-java" % "3.5.1",
-      ),
+lazy val macros: Project = {
+  Project("macros", file("macros"))
+    .settings(buildSettings ++ Seq(
+      libraryDependencies += scalaVersion("org.scala-lang" % "scala-compiler" % _).value,
+      libraryDependencies += scalaVersion("org.scala-lang" % "scala-reflect" % _).value,
+      libraryDependencies += "com.chuusai" %% "shapeless" % "2.3.3",
+      libraryDependencies ++= (
+        if (scalaVersion.value.startsWith("2.10")) List("org.scalamacros" %% "quasiquotes" % paradiseVersion)
+        else Nil
+        )
+      )
     )
 }
 
-lazy val core = {
-  (project in file("core"))
-    .dependsOn(testMessages % "test->test")
-    .settings(
-      name := "shapeless-protobuf-core",
+lazy val core: Project = {
+  Project("core", file("core"))
+    .enablePlugins(ProtobufTestPlugin)
+    .settings(buildSettings ++ Seq(
       libraryDependencies ++= Seq(
-        "org.scala-lang" % "scala-compiler" % scalaVersion.toString,
-        "org.scala-lang" % "scala-reflect" % scalaVersion.toString,
-        "com.chuusai" %% "shapeless" % "2.3.3",
         "org.scalacheck" %% "scalacheck" % "1.14.0" % "test",
         "com.github.alexarchambault" %% "scalacheck-shapeless_1.13" % "1.1.6" % "test",
       ),
-      scalacOptions ++= Seq(
-        "-Xlog-implicits",
-      ),
-      addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
-    )
+    ))
+    .dependsOn(macros)
 }

@@ -93,7 +93,7 @@ private[protobuf] class ShapelessProtobufMacros(val c: whitebox.Context) {
         case name => name.endsWith("OrBuilder") // TODO check properly, with proto class name
       }
     }.getOrElse(error(s"$tpe isn't protobuf type: ${tpe}OrBuilder type not found"))
-      .asType.toType.decls.sorted.collect { case sym: TermSymbol => sym }
+      .asType.toType.decls.sorted.collect { case sym: TermSymbol => sym }.filterNot(_.isConstructor)
     // TODO refactor it
     allSyms.filterNot { sym =>
       val symName = sym.name.toString
